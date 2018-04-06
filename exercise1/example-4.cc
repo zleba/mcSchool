@@ -27,7 +27,7 @@ int main (int argc,char **argv)
     double nhit = 0;
 
     for (int n1 = 0; n1 < npoints; ++n1) {
-        #define LVEC 2
+        const int LVEC = 2;
         double rvec[LVEC];
         ranlxd(rvec,LVEC);
         // insert here the values for x,y and the rejection condition   

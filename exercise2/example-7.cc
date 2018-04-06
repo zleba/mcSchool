@@ -172,30 +172,22 @@ int main(int argc,char **argv)
     TApplication* gMyRootApp = new TApplication("My ROOT Application", &argc, argv);
     const int npoints = 1e7;
 
-
-    double xmin = 0.00001, q2=100*100;
-    double x , kx, ky, kt2, weightx ;
-    double x0, kx0, ky0, kt20, weightx0 ;
-
-    double a,b, binwidth1,binwidth2;
+    const double xmin = 0.00001, q2=100*100;
 
     // initialise random number generator: rlxd_init( luxory level, seed )
     rlxd_init(2,32767);
 
     // book histograms: TH1D("label","title",nr of bins, xlow,xhigh )
     TH1D *histo1  = new TH1D("x0","x0",100, -5, 0.);
-    TH1D *histo10 = new TH1D(*histo1); 
-    binwidth1=5./100.;
     TH1D *histo2  = new TH1D("kt0 ","kt0 ",100, 0, 10.);
-    TH1D *histo20 = new TH1D(*histo2); 
-    binwidth2=1000./1000;
     TH1D *histo3  = new TH1D("x","x",100, -5, 0.);
-    TH1D *histo30 = new TH1D(*histo3); 
     TH1D *histo4  = new TH1D("kt ","kt ",1000, 0, 1000.);
-    TH1D *histo40 = new TH1D(*histo4); 
 
 
     for (int n1 = 0; n1 < npoints; n1++ ) {
+
+        double x , kx, ky, kt2, weightx ;
+        double x0, kx0, ky0, kt20, weightx0 ;
 
         // generate starting distribution in x and kt
         get_starting_pdf(xmin, q2, weightx0, x0, kx0, ky0, kt20);
@@ -206,9 +198,9 @@ int main(int argc,char **argv)
             // weighting with 1/x0:
             // plot dxg(x)/dlogx *Jacobian, Jacobian dlogx/dx = 1/x
             // log(x) = 2.3026 log10(x)
-            histo1->Fill(log10(x0), weightx0/2.3026);
+            histo1->Fill(log10(x0), weightx0/log(10));
             histo2->Fill(sqrt(kt20),weightx0);
-            histo3->Fill(log10(x),  weightx/2.3026);
+            histo3->Fill(log10(x),  weightx/log(10));
             histo4->Fill(sqrt(kt2), weightx);
         }
     }          
@@ -224,37 +216,32 @@ int main(int argc,char **argv)
     TCanvas *c = new TCanvas("ctest", "" ,0, 0, 500, 500);
     // divide the canvas in 1 parts in x and 1 in y
     c -> Divide(2,2);
-    a=1./npoints/binwidth1; 
-    b=0; 
 
     c->cd(1);
-    histo10->Add(histo1,histo1,a,b); 
+    histo1->Scale(1./npoints, "width");
     // histo1->Write();
-    histo10->Write();
+    histo1->Write();
     // gPad->SetLogy();
-    histo10->Draw();
+    histo1->Draw();
 
     c->cd(2);
-    a=1./npoints/binwidth1; 
-    histo30->Add(histo3,histo3,a,b); 
-    histo30->Write();
-    histo30->Draw();
+    histo3->Scale(1./npoints, "width");
+    histo3->Write();
+    histo3->Draw();
 
 
     c->cd(3);
-    a=1./npoints/binwidth2; 
-    histo20->Add(histo2,histo2,a,b); 
-    histo20->Write();
+    histo2->Scale(1./npoints, "width");
+    histo2->Write();
     gPad->SetLogy();
-    histo20->Draw();
+    histo2->Draw();
 
 
     c->cd(4);
-    a=1./npoints/binwidth1; 
-    histo40->Add(histo4,histo4,a,b); 
-    histo40->Write();
+    histo4->Scale(1./npoints, "width");
+    histo4->Write();
     gPad->SetLogy();
-    histo40 -> Draw();
+    histo4->Draw();
 
     c-> Draw();
     c->WaitPrimitive();

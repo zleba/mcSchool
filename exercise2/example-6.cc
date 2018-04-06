@@ -1,4 +1,3 @@
-//#include "courselib.h"
 #include "ranlxd.h"
 #include <cmath>
 #include "TH1.h"
