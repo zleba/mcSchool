@@ -108,8 +108,6 @@ int main (int argc,char **argv)
     const int ntmax = 20;
     const double tmin = 1., tmax = 500.; 
 
-#define LVEC 10
-    double rvec[LVEC];
     // initialise random number generator: rlxd_init( luxory level, seed )
     rlxd_init(2,32767);
 
@@ -127,7 +125,10 @@ int main (int argc,char **argv)
         double t2 = tmax; // select here the upper scale t2 = tmax
         // cout << " tmax = "<< t2 << " t1 = "<< t1 << " delta " << delta<< endl;
         for (int n1 = 0; n1 < npoints; ++n1) {
+            const int LVEC = 10;
+            double rvec[LVEC];
             ranlxd(rvec,LVEC);
+
             double x1 = rvec[0];
             double y1 = rvec[1];
             double ff = suda(t1, t2, x1, y1);
