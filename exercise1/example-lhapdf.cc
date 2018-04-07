@@ -77,7 +77,6 @@ int main()
         // for importance sampling
         double xrn = rvec[0];
         double x = xmin * pow((xmax/xmin), xrn);
-        double Q2 = Q*Q;
         double f=0;
         int flavor;
         // the pdf from LHAPDFLIB is called via: xfx(x,Q,flavor) 

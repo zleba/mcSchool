@@ -29,7 +29,8 @@ int main (int argc,char **argv)
     const int npoints = 1000000;
 
     //Init histograms for given number of points in sum
-    vector<int> points = {1, 3, 6, 10, 12, 20, 40};
+    int pointsA[] = {1, 3, 6, 10, 12, 20, 40};
+    vector<int> points(pointsA, pointsA + sizeof(pointsA)/sizeof(pointsA[0]));
     vector<TH1D*> histos(points.size());
     for(unsigned i = 0; i < points.size(); ++i) {
         TString n = TString::Format("r%d",points[i]);
@@ -82,8 +83,8 @@ int main (int argc,char **argv)
 
     // write histogramm out to file
     TFile file("output-example2.root","RECREATE");
-    for(auto & h : histos)
-        h->Write();
+    for(unsigned iH = 0; iH < points.size(); ++iH)
+        histos[iH]->Write();
 
     file.Close();
     gMyRootApp->Run();

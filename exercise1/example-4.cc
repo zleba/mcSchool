@@ -1,5 +1,6 @@
 #include "courselib.h"
 #include <cmath>
+#include <cstdlib>
 #include <iostream>
 
 using namespace std;
