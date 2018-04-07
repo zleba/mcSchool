@@ -1,0 +1,2 @@
+#/bin/sh
+sudo docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v $PWD:/excercise --rm -it --user $(id -u) rootproject/root-ubuntu16 /bin/bash -c "cd /excercise/; $*"

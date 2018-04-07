@@ -22,7 +22,7 @@ int main (int argc,char **argv)
 
     const double xlow=0.,xup=1.,ylow=0.,yup=1;
     //  TH2D("label", "title", nBinsX, xlow, xhigh,  nBinsY, ylow, yhigh )
-    TH2D *histo1 = new TH2D("congruental rnadom numbers","congruental rnadom numbers ",100, xlow, xup, 100, ylow, yup);
+    TH2D *histo1 = new TH2D("congruental random numbers","congruental random numbers ",100, xlow, xup, 100, ylow, yup);
     TH2D *histo2 = new TH2D("RANLUX","RANLUX",100, xlow, xup, 100, ylow, yup);
 
     // initialise random number generator: rlxd_init( luxory level, seed )

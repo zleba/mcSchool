@@ -20,7 +20,7 @@ using namespace std;
 
 int main (int argc,char **argv)
 {
-    const int npoints = 10000000;
+    const int npoints = 100000000;
     // initialise random number generator: rlxd_init( luxory level, seed )
     rlxd_init(2,32767);
 
