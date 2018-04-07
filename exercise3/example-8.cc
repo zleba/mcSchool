@@ -41,34 +41,28 @@ double sigma (double m2, double sh, double th)
     return result; 
 }
 
-double gauss ( double mean, double sigma )
-{	
-    const int npoints = 12;
 
-    double r = 0;
-    for (int n1 = 0; n1 < npoints; ++n1) {
-        r += Rand();
-    }
-    double result =mean + sigma * (r - 6);
-    result = abs(result);
-    return(result);
+void gauss2D (double sigma, double &kx, double &ky)
+{
+    double kT  = sigma * sqrt(-2*log(Rand()));
+    double phi = 2*M_PI * Rand();
+    kx = kT*cos(phi);
+    ky = kT*sin(phi);
 }
 
-void getpdf (double xmin, double q2,double& weightx, double& x, double& kx, double& ky)
+
+void getpdf (double xmin, double q2, double& weightx, double& x, double& kx, double& ky)
 {
-    double xmax = 0.999,pdf;
-    double phi;
+    double xmax = 0.999;
 
     x = xmin*pow(xmax/xmin, Rand());
     weightx =  x*log(xmax/xmin) ;
     // this is for the simple case            
-    pdf = 3.*pow((1-x),5)/x;
+    double pdf = 3.*pow((1-x),5)/x;
 
     weightx = weightx * pdf;
-    double kt2 = gauss(0,0.7);
-    phi = 2*M_PI*Rand();
-    kx = sqrt(kt2)*cos(phi);
-    ky = sqrt(kt2)*sin(phi);
+
+    gauss2D(0.7, kx, ky);
 }
 
 int main (int argc,char **argv)
@@ -84,9 +78,7 @@ int main (int argc,char **argv)
 
     // book the histogram TH1D("label","title",nr of bins, xlow,xhigh )
     TH1D *histo1  = new TH1D("x1","x1",100, -5, 0.);
-    TH1D *histo10 = new TH1D(*histo1); 
     TH1D *histo2  = new TH1D("x2","x2",100, -5, 0.);
-    TH1D *histo20 = new TH1D(*histo2); 
     TH1D *histo3  = new TH1D("kt1 ","kt1 ",100, 0, 10.);
     TH1D *histo4  = new TH1D("kt2 ","kt2 ",100, 0, 10.);
     TH1D *histo5  = new TH1D("pt ","pt ",50, 0, 10.);
@@ -175,11 +167,11 @@ int main (int argc,char **argv)
     // divide the canvas in 1 parts in x and 1 in y
     c->Divide(3,3);
     c->cd(1);
-    histo10->Scale(1./npoints, "width");
-    histo10->Draw();
+    histo1->Scale(1./npoints, "width");
+    histo1->Draw();
     c->cd(2);
-    histo20->Scale(1./npoints, "width");
-    histo20->Draw();
+    histo2->Scale(1./npoints, "width");
+    histo2->Draw();
     c->cd(3);
     histo3->Draw();
     c->cd(4);

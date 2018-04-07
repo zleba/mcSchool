@@ -33,7 +33,7 @@ typedef struct {
 } PVEC;
 #define DOTPR(p1,p2) (p1.e*p2.e-p1.px*p2.px-p1.py*p2.py-p1.pz*p2.pz)
 
-void getpdf(double xmin, double q2,double& weightx, double& x, double& kx, double& ky, double& kt2 );
+void getpdf (double xmin, double q2,double& weightx, double& x, double& kx, double& ky);
 
 double sigma(double m2, double sh, double th)
 {	
@@ -64,7 +64,6 @@ int main(int argc,char **argv)
     double m_higgs = 125., Gamma=0.4; /* Width from PDG 2014 */
     static const double pi = 3.14159265358979323848;
     double s=4*3500.*3500.,stest;
-    double kt2, kt21,kt22;
     double pt2, rapidity;
     double weightx1, weightx2;
     double sum0, sum00, ff, sigma2, error;
@@ -116,20 +115,20 @@ int main(int argc,char **argv)
         // this is using importance sampling
         // generate starting distribution in x and kt
         // define incoming partons: parton 1
-        getpdf(x1min, q2, weightx1, x1, kx, ky, kt2 );
+        getpdf(x1min, q2, weightx1, x1, kx, ky);
         p_a.px = kx;
         p_a.py = ky;
         p_a.pz = sqrt(s)/2.*x1;
         p_a.e = sqrt(p_a.px*p_a.px + p_a.py*p_a.py + p_a.pz*p_a.pz);
-        kt21 = p_a.px*p_a.px+p_a.py*p_a.py;
-        getpdf(x2min, q2, weightx2, x2, kx, ky, kt2 );
+        double kt21 = p_a.px*p_a.px+p_a.py*p_a.py;
+        getpdf(x2min, q2, weightx2, x2, kx, ky);
 
         // define incoming partons: parton 2
         p_b.px = kx;
         p_b.py = ky;
         p_b.pz = -sqrt(s)/2.*x2;
         p_b.e = sqrt(p_b.px*p_b.px + p_b.py*p_b.py + p_b.pz*p_b.pz);
-        kt22 = p_b.px*p_b.px+p_b.py*p_b.py;
+        double kt22 = p_b.px*p_b.px+p_b.py*p_b.py;
 
         // plot dxg(x)/dlogx *Jacobian, Jacobian dlogx/dx = 1/x
         histo1->Fill(log10(x1),weightx1/2.3026);

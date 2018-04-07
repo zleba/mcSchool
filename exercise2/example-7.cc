@@ -6,6 +6,7 @@
 #include <TApplication.h>
 #include <TStyle.h>
 #include <TROOT.h>
+#include <TF1.h>
 #include <iostream>
 
 using namespace std;
@@ -27,40 +28,31 @@ using namespace std;
 */
 
 
-double gauss ( double mean, double sigma )
-{	
-    const int npoints = 12;
-
-    double r = 0;
-    for (int n1 = 0; n1 < npoints; n1++ )
-        r += Rand();
-
-    double result = mean + sigma * (r - 6.);
-    return abs(result); //why abs?
+void gauss2D (double sigma, double &kx, double &ky)
+{
+    double kT  = sigma * sqrt(-2*log(Rand()));
+    double phi = 2*M_PI * Rand();
+    kx = kT*cos(phi);
+    ky = kT*sin(phi);
 }
 
-void get_starting_pdf(double xmin, double q2, double& weightx, double& x, double& kx, double& ky, double& kt2)
+void get_starting_pdf (double xmin, double q2, double& weightx, double& x, double& kx, double& ky)
 {
     const double xmax = 1;
-    double pdf;
-    double phi;
 
     // get x value according to g(x)\sim 1/x            
     x = xmin*pow(xmax/xmin, Rand());
     // use: xg(x) = 3 (1-x)**5
 
-    pdf     = pow(1-x, 5) * 3./x;
+    double pdf     = pow(1-x, 5) * 3./x;
     weightx = x*log(xmax/xmin) * pdf ;
 
     // now generate instrinsic kt according to a gauss distribution  
-    kt2 = gauss(0,0.7);
-    phi = 2. * M_PI * Rand();            
-    kx = sqrt(kt2)*cos(phi);
-    ky = sqrt(kt2)*sin(phi);
+    gauss2D(0.7, kx, ky);
     // cout << "in getpdf:  x " << x << " kx " << kx <<" ky " << ky <<endl; 
 }
 
-void sudakov(double t0, double& t)
+void sudakov (double t0, double& t)
 {
 //  here we calculate  from the sudakov form factor the next t > t0
     double epsilon = 0.1;
@@ -109,15 +101,14 @@ void splitting(double& z, double& weightz)
     weightz = 1.;		
 }
 
-void evolve_pdf(double xmin, double q2, double x0, double kx0, double ky0, double kt20,  double& weightx, double& x, double& kx, double& ky, double& kt2)
+void evolve_pdf(double xmin, double q2, double x0, double kx0, double ky0, double& weightx, double& x, double& kx, double& ky)
 {
-    double t0=1.,t1, tcut,phi;
+    double t0=1.,t1, tcut;
     double z=0, weightz;
     double ratio_splitting;
     x = x0;
     kx = kx0;
     ky = ky0;
-    kt2 = kt20;
     weightx = 1. ;
     t1 = t0 ;
     tcut = q2;
@@ -134,21 +125,20 @@ void evolve_pdf(double xmin, double q2, double x0, double kx0, double ky0, doubl
            by the ratio of the intgral of the full and 
            approximate splitting fct
          */
-        ratio_splitting= 2; /* for using Pgg*/
+        ratio_splitting = 2; /* for using Pgg*/
 
         if ( t1 < tcut ) { 
             x = x*z;
             weightx = weightx *weightz*ratio_splitting;
-            phi = 2*M_PI*Rand();  
             /* 
                use here the angular ordering condition: sqrt(t1) = qt/(1-z) 
                and apply this also to the propagator gluons
              */
-            kx = kx + sqrt(t1)*cos(phi)*(1.-z);
-            ky = ky + sqrt(t1)*sin(phi)*(1.-z);                     
+            double phi = 2*M_PI*Rand();  
+            kx +=  sqrt(t1)*cos(phi)*(1.-z);
+            ky +=  sqrt(t1)*sin(phi)*(1.-z);                     
             //                     kx = kx + sqrt(t1)*cos(phi);
             //                     ky = ky + sqrt(t1)*sin(phi);                     
-            kt2 = kx*kx + ky*ky ;
         }
     }
     // cout << " evolve end  t= "<< t<< " q2 " <<q2 << " x0 = " <<x0 << "x =" << x <<endl;
@@ -160,7 +150,7 @@ int main(int argc,char **argv)
 {
     TH1::SetDefaultSumw2();
     TApplication* gMyRootApp = new TApplication("My ROOT Application", &argc, argv);
-    const int npoints = 1e7;
+    const int npoints = 1e6;
 
     const double xmin = 0.00001, q2=100*100;
 
@@ -174,31 +164,37 @@ int main(int argc,char **argv)
     TH1D *histo4  = new TH1D("kt ","kt ",1000, 0, 1000.);
 
 
+
+
     for (int n1 = 0; n1 < npoints; n1++ ) {
 
-        double x , kx, ky, kt2, weightx ;
-        double x0, kx0, ky0, kt20, weightx0 ;
+        double x , kx, ky, weightx ;
+        double x0, kx0, ky0, weightx0 ;
 
         // generate starting distribution in x and kt
-        get_starting_pdf(xmin, q2, weightx0, x0, kx0, ky0, kt20);
+        get_starting_pdf(xmin, q2, weightx0, x0, kx0, ky0);
         // now do the evolution	
-        evolve_pdf(xmin, q2, x0, kx0, ky0, kt20, weightx, x, kx, ky, kt2);   
+        evolve_pdf(xmin, q2, x0, kx0, ky0, weightx, x, kx, ky);   
         weightx = weightx0 * weightx;         
+
         if (x < 1) {
             // weighting with 1/x0:
             // plot dxg(x)/dlogx *Jacobian, Jacobian dlogx/dx = 1/x
             // log(x) = 2.3026 log10(x)
+            double kt0 = sqrt(kx0*kx0 + ky0*ky0);
+            double kt  = sqrt(kx*kx + ky*ky);
+
             histo1->Fill(log10(x0), weightx0/log(10));
-            histo2->Fill(sqrt(kt20),weightx0);
+            histo2->Fill(kt0,weightx0);
             histo3->Fill(log10(x),  weightx/log(10));
-            histo4->Fill(sqrt(kt2), weightx);
+            histo4->Fill(kt, weightx);
         }
     }          
 //                                  
 
     gStyle->SetPadTickY(1); // ticks at right side
     gStyle->SetOptStat(0); // get rid of statistics box
-    TCanvas *c = new TCanvas("ctest", "" ,0, 0, 500, 500);
+    TCanvas *c = new TCanvas("ctest", "", 0, 0, 500, 500);
     // divide the canvas in 2 parts in x and 2 in y
     c -> Divide(2,2);
 
