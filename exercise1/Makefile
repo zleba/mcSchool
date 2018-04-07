@@ -23,7 +23,8 @@ clean:
 
 
 #LHAPDF includes + libraries
-ifeq ($(shell which lhapdf-config),"")
+SVN_INFO := $(shell which lhapdf-config 1>&2 2> /dev/null; echo $$?)
+ifeq ($(SVN_INFO),0)
 LHALIBS = $(shell lhapdf-config --libdir)
 LHAINC  = $(shell lhapdf-config --incdir)
 else
