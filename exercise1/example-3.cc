@@ -1,4 +1,4 @@
-#include "ranlxd.h"
+#include "courselib.h"
 #include <cmath>
 #include <iostream>
 using namespace std;
@@ -27,15 +27,13 @@ int main(int argc,char **argv)
 {
     const int npoints = 10000000;
 
-    double xg0 = 0, xg00 = 0;
     // initialise random number generator: rlxd_init( luxory level, seed )
     rlxd_init(2,32767);
 
+    double xg0 = 0, xg00 = 0;
+
     for (int n1 = 0; n1 < npoints; ++n1) {
-        #define LVEC 1
-        double rvec[LVEC];
-        ranlxd(rvec,LVEC);
-        double x0 = rvec[0];
+        double x0 = Rand();;
         double f  = g0(x0); 
         double ff = f;
         xg0  +=  ff;

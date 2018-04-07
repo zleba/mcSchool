@@ -171,10 +171,9 @@ int main(int argc,char **argv)
         }          
     }
     //             
-    double norm, normpoints;                     
+    double norm;                     
     getnorm(norm);
     cout << " norm " << norm << endl;
-    normpoints = npoints/norm;
 
 
     sum0 = sum0/npoints;
@@ -214,9 +213,7 @@ int main(int argc,char **argv)
     c -> cd(7);
     histo7 -> Draw();
     c-> Draw();
-    c->WaitPrimitive();
     c-> Print("example9.pdf");
-    gMyRootApp->SetReturnFromRun(true);
 
     histo1->Write();
     histo2->Write();
@@ -226,5 +223,7 @@ int main(int argc,char **argv)
     histo6->Write();
     histo7->Write();
     file.Close();
-    return(0);
+
+    gMyRootApp->Run();
+    return EXIT_SUCCESS;
     }

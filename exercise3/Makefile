@@ -2,8 +2,8 @@
 ROOTCFLAGS = $(shell root-config --cflags)
 ROOTLIBS   = $(shell root-config --libs)
 
-# Debugging informations + level-2 optimalisation
-CFLAGS=-g -O2
+# Debugging informations + allWarnings + level-3 optimalisation
+CFLAGS=-g -Wall -O3
 
 all: example-8 example-9
 
@@ -16,7 +16,7 @@ example-9: example-9.cc getpdf.o ranlxd.o
 
 # Rule to compile Ranlux
 ranlxd.o: ranlxd.cc
-	g++  $(CFLAGS) -c  $^ -o $@  
+	g++  $(CFLAGS) -DSSE -c  $^ -o $@  
 
 getpdf.o: getpdf.cc
 	g++  $(CFLAGS) -c  $^ -o $@  

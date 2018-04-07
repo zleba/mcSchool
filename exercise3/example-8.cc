@@ -1,4 +1,4 @@
-#include "ranlxd.h"
+#include "courselib.h"
 #include <cmath>
 #include "TH1.h"
 #include "TFile.h" 
@@ -43,42 +43,37 @@ double sigma (double m2, double sh, double th)
 
 double gauss ( double mean, double sigma )
 {	
-	int n1, npoints = 12;
-	double rvec[12];
-      double result, r;
-      result = 0.;
-      r = 0;
-      ranlxd(rvec,12);
-	for ( n1 = 0; n1 < npoints; n1++ ) {
-		r = r + rvec[n1] ;
-	}
-      result =mean + sigma * (r - 6);
-      result = abs(result);
-      return(result);
+    const int npoints = 12;
+
+    double r = 0;
+    for (int n1 = 0; n1 < npoints; ++n1) {
+        r += Rand();
+    }
+    double result =mean + sigma * (r - 6);
+    result = abs(result);
+    return(result);
 }
 
-void getpdf (double xmin, double q2,double& weightx, double& x, double& kx, double& ky, double& kt2 )
+void getpdf (double xmin, double q2,double& weightx, double& x, double& kx, double& ky)
 {
-    double xmax = 0.999,pdf,q;
+    double xmax = 0.999,pdf;
     double phi;
-    double rvec[2];
-    ranlxd(rvec,2);
 
-    x = xmin*pow(xmax/xmin,rvec[0]);
+    x = xmin*pow(xmax/xmin, Rand());
     weightx =  x*log(xmax/xmin) ;
     // this is for the simple case            
-    pdf = 3.*pow((1-x),5)/x  ;
-    q = sqrt(q2);
+    pdf = 3.*pow((1-x),5)/x;
 
     weightx = weightx * pdf;
-    kt2 = gauss(0,0.7);
-    phi = 2*M_PI*rvec[1];
+    double kt2 = gauss(0,0.7);
+    phi = 2*M_PI*Rand();
     kx = sqrt(kt2)*cos(phi);
     ky = sqrt(kt2)*sin(phi);
 }
 
 int main (int argc,char **argv)
 {
+    TH1::SetDefaultSumw2();
     TApplication* gMyRootApp = new TApplication("My ROOT Application", &argc, argv);
     const int npoints = 1.0e6;
     const double x1min = 0.00001, x2min = 0.00001;
@@ -111,17 +106,17 @@ int main (int argc,char **argv)
     for (int n1 = 0; n1 < npoints; ++n1) {
         // this is using importance sampling
         // generate starting distribution in x and kt
-        double kx, ky, kt2, weightx1, weightx2;
+        double kx, ky, weightx1, weightx2;
         double x1, x2;
 
         // define incoming partons: parton 1
-        getpdf(x1min, q2, weightx1, x1, kx, ky, kt2 );
+        getpdf(x1min, q2, weightx1, x1, kx, ky);
         TLorentzVector pA;
         pA.SetXYZM(kx, ky, sqrt(s)/2.*x1, 0.);
 
 
         // define incoming partons: parton 2
-        getpdf(x2min, q2, weightx2, x2, kx, ky, kt2 );
+        getpdf(x2min, q2, weightx2, x2, kx, ky);
         TLorentzVector pB;
         pB.SetXYZM(kx, ky, -sqrt(s)/2.*x2, 0.);
 
@@ -168,6 +163,7 @@ int main (int argc,char **argv)
     double error = sqrt(sigma2/npoints) ;
     cout << " nr of events accepted: "<< nacc << endl;
     cout<< " integral for Higgs xsection is [pb]: " << sum0 * 1000.<< " +/- " << error*1000.<< endl;
+
     // write histogramm out to file
     TFile file("output-example8.root","RECREATE");
     //general root settings 
@@ -195,9 +191,7 @@ int main (int argc,char **argv)
     c->cd(7);
     histo7->Draw();
     c-> Draw();
-    c->WaitPrimitive();
     c-> Print("example8.pdf");
-    gMyRootApp->SetReturnFromRun(true);
 
     histo1->Write();
     histo2->Write();
@@ -207,5 +201,6 @@ int main (int argc,char **argv)
     histo6->Write();
     histo7->Write();
     file.Close();
+    gMyRootApp->Run();
     return EXIT_SUCCESS;
 }

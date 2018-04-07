@@ -1,4 +1,4 @@
-#include "ranlxd.h"
+#include "courselib.h"
 #include "TH2.h"
 #include "TFile.h" 
 #include "TCanvas.h"
@@ -20,7 +20,7 @@ int main (int argc,char **argv)
     const long long ia=205, ic=29573, im=139968;
     long long last=4711;
 
-    double xlow=0.,xup=1.,ylow=0.,yup=1;
+    const double xlow=0.,xup=1.,ylow=0.,yup=1;
     //  TH2D("label", "title", nBinsX, xlow, xhigh,  nBinsY, ylow, yhigh )
     TH2D *histo1 = new TH2D("congruental rnadom numbers","congruental rnadom numbers ",100, xlow, xup, 100, ylow, yup);
     TH2D *histo2 = new TH2D("RANLUX","RANLUX",100, xlow, xup, 100, ylow, yup);
@@ -44,11 +44,8 @@ int main (int argc,char **argv)
         // cout << " x,y " << x << " " <<  y  << endl;             
         // next use the ranlux generator and compare also the 2 random numbers
 
-        const int LVEC = 2;
-        double rvec[LVEC];
-        ranlxd(rvec,LVEC);
-        double xRL = rvec[0];
-        double yRL = rvec[1];
+        double xRL = Rand();
+        double yRL = Rand();
         histo2->Fill(xRL, yRL);
     }
 
@@ -58,20 +55,20 @@ int main (int argc,char **argv)
     c->Divide(2,1);
     //enter the first part of the canvas (upper left)
     c->cd(1);
-    histo1 -> Draw();
+    histo1->Draw();
 
     c->cd(2);
-    histo2 -> Draw();
+    histo2->Draw();
 
-    c->WaitPrimitive();
-    c-> Print("example1.pdf");
-    gMyRootApp->SetReturnFromRun(true);
+    c->Print("example1.pdf");
 
     // write histogramm out to file
     TFile file("output-example1.root","RECREATE");
     histo1->Write();
     histo2->Write();
     file.Close();
+
+    gMyRootApp->Run();
     return EXIT_SUCCESS;
 }
 

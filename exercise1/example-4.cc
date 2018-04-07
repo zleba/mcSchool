@@ -1,6 +1,7 @@
-#include "ranlxd.h"
+#include "courselib.h"
 #include <cmath>
 #include <iostream>
+
 using namespace std;
 
 /*
@@ -16,34 +17,34 @@ using namespace std;
    Computer Physics Communications 79 (1994) 100  
 */
 
-
-
 int main (int argc,char **argv)
 {
     const int npoints = 10000000;
     // initialise random number generator: rlxd_init( luxory level, seed )
     rlxd_init(2,32767);
 
-    double nhit = 0;
+    int nhit = 0;
 
     for (int n1 = 0; n1 < npoints; ++n1) {
-        const int LVEC = 2;
-        double rvec[LVEC];
-        ranlxd(rvec,LVEC);
+
         // insert here the values for x,y and the rejection condition   
-        double x = rvec[0];
-        double y = rvec[1];
+
+        double x = Rand();
+        double y = Rand();
+
         if (y < x)    
             ++nhit;
         //                                  
     }
 
-    double Int = nhit/npoints;
+    double Int = double(nhit)/npoints;
     // the uncertainty is calcualted from a Binominal distribution
-    double sigma2 = (1. - nhit/npoints)/nhit ;
+    double sigma2 = (1. - Int)/nhit ;
     double error = sqrt(sigma2)*Int ;
+
     cout<<" integral for  is: "<<Int<<"+/-"<< error<<endl;
     cout<<" true integral  is : 0.5 "<< endl;
+
     return EXIT_SUCCESS;
 }
 

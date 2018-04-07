@@ -1,4 +1,4 @@
-#include "ranlxd.h"
+#include "courselib.h"
 #include <cmath>
 #include "TH1.h"
 #include "TFile.h" 
@@ -31,12 +31,9 @@ double gauss ( double mean, double sigma )
 {	
     const int npoints = 12;
 
-    double rvec[npoints];
-    ranlxd(rvec, npoints);
-
     double r = 0;
     for (int n1 = 0; n1 < npoints; n1++ )
-        r += rvec[n1];
+        r += Rand();
 
     double result = mean + sigma * (r - 6.);
     return abs(result); //why abs?
@@ -48,11 +45,8 @@ void get_starting_pdf(double xmin, double q2, double& weightx, double& x, double
     double pdf;
     double phi;
 
-    double rvec[2];
-    ranlxd(rvec,2);
-
     // get x value according to g(x)\sim 1/x            
-    x = xmin*pow(xmax/xmin,rvec[0]);
+    x = xmin*pow(xmax/xmin, Rand());
     // use: xg(x) = 3 (1-x)**5
 
     pdf     = pow(1-x, 5) * 3./x;
@@ -60,7 +54,7 @@ void get_starting_pdf(double xmin, double q2, double& weightx, double& x, double
 
     // now generate instrinsic kt according to a gauss distribution  
     kt2 = gauss(0,0.7);
-    phi = 2. * M_PI * rvec[1];            
+    phi = 2. * M_PI * Rand();            
     kx = sqrt(kt2)*cos(phi);
     ky = sqrt(kt2)*sin(phi);
     // cout << "in getpdf:  x " << x << " kx " << kx <<" ky " << ky <<endl; 
@@ -70,16 +64,15 @@ void sudakov(double t0, double& t)
 {
 //  here we calculate  from the sudakov form factor the next t > t0
     double epsilon = 0.1;
-    double as2pi = 0.1/2./M_PI,Ca=3.;
+    double as2pi = 0.1/2./M_PI, Ca=3.;
     double Pint;
 // for Pgg use fact = 2*Ca
 
     double fac=2.*Ca; 
-    double r1,t2;
-    double rvec[1];
-    ranlxd(rvec,1);
+    double t2;
     // use fixed alphas and only the 1/(1-z) term of the splitting fct
-    r1 = rvec[0];
+
+    double r1 = Rand();
     Pint=log((1.-epsilon)/epsilon); /* for 1/(1-z) splitting fct */
     t2 = -log(r1)/fac/as2pi/Pint;
     t2 = t0 * exp(t2);
@@ -96,8 +89,6 @@ void splitting(double& z, double& weightz)
 
     double as2pi = 0.1/2./M_PI;
 
-    double rvec[2];
-    ranlxd(rvec,2);
 //		here we calculate  the splitting variable z for 1/z and  1/(1-z)
 //		use Pgg=6 (1./z + 1./(1.-z))
 
@@ -108,8 +99,8 @@ void splitting(double& z, double& weightz)
     double zmin = epsilon;
     double zmax = 1.-epsilon;
 
-    double r1 = rvec[0];
-    double r2 = rvec[1];
+    double r1 = Rand();
+    double r2 = Rand();
 
     z = zmin*pow((zmax/zmin),r2);
     if (r1 > g0/gtot)
@@ -123,7 +114,6 @@ void evolve_pdf(double xmin, double q2, double x0, double kx0, double ky0, doubl
     double t0=1.,t1, tcut,phi;
     double z=0, weightz;
     double ratio_splitting;
-    double rvec[2];
     x = x0;
     kx = kx0;
     ky = ky0;
@@ -132,43 +122,43 @@ void evolve_pdf(double xmin, double q2, double x0, double kx0, double ky0, doubl
     t1 = t0 ;
     tcut = q2;
     while (t1 < tcut ) {
-        ranlxd(rvec,2);
         // here we do now the evolution
         // first we generate t
         t0 = t1;
         sudakov(t0, t1) ;
         // now we generate z
         splitting(z, weightz);
-                  /* 
-                    since the sudakov involves only the 1/(1-z) part 
-                    of the splitting fct, we need to weight each branching
-                    by the ratio of the intgral of the full and 
-                    approximate splitting fct
-                  */
-			ratio_splitting= 2; /* for using Pgg*/
+        /* 
+           since the sudakov involves only the 1/(1-z) part 
+           of the splitting fct, we need to weight each branching
+           by the ratio of the intgral of the full and 
+           approximate splitting fct
+         */
+        ratio_splitting= 2; /* for using Pgg*/
 
-                  if ( t1 < tcut ) { 
-                     x = x*z;
-                     weightx = weightx *weightz*ratio_splitting;
-      	         phi = 2*M_PI*rvec[0];  
-                     /* 
-                     use here the angular ordering condition: sqrt(t1) = qt/(1-z) 
-                     and apply this also to the propagator gluons
-                     */
-                     kx = kx + sqrt(t1)*cos(phi)*(1.-z);
-                     ky = ky + sqrt(t1)*sin(phi)*(1.-z);                     
-//                     kx = kx + sqrt(t1)*cos(phi);
-//                     ky = ky + sqrt(t1)*sin(phi);                     
-                     kt2 = kx*kx + ky*ky ;
-                     }
-            }
-// cout << " evolve end  t= "<< t<< " q2 " <<q2 << " x0 = " <<x0 << "x =" << x <<endl;
+        if ( t1 < tcut ) { 
+            x = x*z;
+            weightx = weightx *weightz*ratio_splitting;
+            phi = 2*M_PI*Rand();  
+            /* 
+               use here the angular ordering condition: sqrt(t1) = qt/(1-z) 
+               and apply this also to the propagator gluons
+             */
+            kx = kx + sqrt(t1)*cos(phi)*(1.-z);
+            ky = ky + sqrt(t1)*sin(phi)*(1.-z);                     
+            //                     kx = kx + sqrt(t1)*cos(phi);
+            //                     ky = ky + sqrt(t1)*sin(phi);                     
+            kt2 = kx*kx + ky*ky ;
+        }
+    }
+    // cout << " evolve end  t= "<< t<< " q2 " <<q2 << " x0 = " <<x0 << "x =" << x <<endl;
 }
 
 
 
 int main(int argc,char **argv)
 {
+    TH1::SetDefaultSumw2();
     TApplication* gMyRootApp = new TApplication("My ROOT Application", &argc, argv);
     const int npoints = 1e7;
 
@@ -206,47 +196,44 @@ int main(int argc,char **argv)
     }          
 //                                  
 
-    // write histogramm out to file
-    TFile file("output-example-7.root","RECREATE");
-    // general root settings 
-    gROOT->Reset();
-    gROOT->SetStyle("Plain");
     gStyle->SetPadTickY(1); // ticks at right side
     gStyle->SetOptStat(0); // get rid of statistics box
     TCanvas *c = new TCanvas("ctest", "" ,0, 0, 500, 500);
-    // divide the canvas in 1 parts in x and 1 in y
+    // divide the canvas in 2 parts in x and 2 in y
     c -> Divide(2,2);
 
     c->cd(1);
     histo1->Scale(1./npoints, "width");
-    // histo1->Write();
-    histo1->Write();
     // gPad->SetLogy();
-    histo1->Draw();
+    histo1->Draw("hist e");
 
     c->cd(2);
     histo3->Scale(1./npoints, "width");
-    histo3->Write();
-    histo3->Draw();
+    histo3->Draw("hist e");
 
 
     c->cd(3);
     histo2->Scale(1./npoints, "width");
-    histo2->Write();
     gPad->SetLogy();
-    histo2->Draw();
+    histo2->Draw("hist e");
 
 
     c->cd(4);
     histo4->Scale(1./npoints, "width");
-    histo4->Write();
     gPad->SetLogy();
-    histo4->Draw();
+    histo4->Draw("hist e");
 
-    c-> Draw();
-    c->WaitPrimitive();
-    c-> Print("example7.pdf");
-    gMyRootApp->SetReturnFromRun(true);
+    c->Draw();
+    c->Print("example7.pdf");
+
+    // write histogramm out to file
+    TFile file("output-example-7.root","RECREATE");
+    histo1->Write();
+    histo2->Write();
+    histo3->Write();
+    histo4->Write();
     file.Close();
+
+    gMyRootApp->Run();
     return EXIT_SUCCESS;
 }

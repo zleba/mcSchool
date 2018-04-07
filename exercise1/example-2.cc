@@ -1,4 +1,5 @@
-#include "ranlxd.h"
+//#include "ranlxd.h"
+#include "courselib.h"
 #include <cmath>
 #include "TH1.h"
 #include "TFile.h" 
@@ -23,12 +24,14 @@ using namespace std;
 
 int main (int argc,char **argv)
 {
+    TH1::SetDefaultSumw2();
     TApplication* gMyRootApp = new TApplication("My ROOT Application", &argc, argv);
     const int npoints = 1000000;
-      
+
+    //Init histograms for given number of points in sum
     vector<int> points = {1, 3, 6, 10, 12, 20, 40};
     vector<TH1D*> histos(points.size());
-    for(int i = 0; i < points.size(); ++i) {
+    for(unsigned i = 0; i < points.size(); ++i) {
         TString n = TString::Format("r%d",points[i]);
         histos[i] = new TH1D(n, n, 100, -6, 6);
     }
@@ -38,48 +41,43 @@ int main (int argc,char **argv)
     rlxd_init(2,32767);
 	for (int n1 = 0; n1 < npoints; n1++ ) {
 
-        #define LVEC 40
-        double rvec[LVEC];
-        ranlxd(rvec,LVEC);
         // here calculate the sum over the random numbers and fill them into the histos
         // calcualte it for the sum over 1,3,6,10,12,20,40 random numbers
         // in root then fit the distribution and determine the mean and sigma
 
-        for(int iH = 0; iH < histos.size(); ++iH) {
+        for(unsigned iH = 0; iH < histos.size(); ++iH) {
             int nP = points[iH];
             double x = 0.;
             for(int n2 = 0; n2 < nP; ++n2)
-                x += rvec[n2];
+                x += Rand();
             histos[iH]->Fill((x - nP/2.)/sqrt(nP/12.));
         }
 
     }
 
     cout<<" Gauss Random number generator "<< endl;
-    TCanvas *c = new TCanvas("ctest", "" ,0, 0, 1000, 500);
+    TCanvas *c = new TCanvas("ctest", "" , 0, 0, 1000, 500);
     // divide the canvas in 1 parts in x and 1 in y
     c->Divide(2,3);
     //enter the first part of the canvas (upper left)
 
-    for(int iH = 0; iH < points.size(); ++iH) {
+    for(unsigned iH = 0; iH < points.size(); ++iH) {
         c->cd(iH+1);
-        histos[iH]->Draw();
+        histos[iH]->SetLineColor(iH+1);
+        histos[iH]->DrawCopy("hist e");
     }
     c->Print("example2.pdf(");
 
     //Plot normalized into single Graph
-    TCanvas *d = new TCanvas("dtest", "" ,0, 0, 1000, 500);
-    for(int iH = 0; iH < points.size(); ++iH) {
-        histos[iH]->SetLineColor(iH+1);
-        histos[iH]->DrawNormalized(iH == 0 ? "": "same");
+    TCanvas *d = new TCanvas("dtest", "" , 0, 0, 1000, 500);
+    for(unsigned iH = 0; iH < points.size(); ++iH) {
+        histos[iH]->Scale(1./histos[iH]->Integral());
+        histos[iH]->Draw(iH == 0 ? "hist e": "hist e same");
     }
-    histos[0]->SetMaximum(1.4*histos[0]->GetMaximum());
+    histos[0]->SetMaximum(0.05);
+    d->BuildLegend();
 
     d->Print("example2.pdf)");
-
-    d->WaitPrimitive();
-    gMyRootApp->SetReturnFromRun(true);
-
 
 
     // write histogramm out to file
@@ -88,6 +86,6 @@ int main (int argc,char **argv)
         h->Write();
 
     file.Close();
+    gMyRootApp->Run();
     return EXIT_SUCCESS;
 }
-

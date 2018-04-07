@@ -1,4 +1,4 @@
-#include "ranlxd.h"
+#include "courselib.h"
 #include <cmath>
 #include <TMath.h>
 #include <iostream>
@@ -36,15 +36,12 @@ int main(int argc,char **argv)
     double xg0 = 0, xg00 = 0;
 
     for (int n1 = 0; n1 < npoints; ++n1) {
-        const int LVEC = 1;
-        double rvec[LVEC];
-        ranlxd(rvec, LVEC);
 
         // here do the calcualtion with importance sampling
-        double x0 = pow(xmin, rvec[0]);
+        double x0 = pow(xmin, Rand());
         double weight = x0*log(1/xmin) ;
         // here do the calcualtion using linear sampling
-        // x0 = xmin+(1-xmin)*rvec[0];
+        // x0 = xmin+(1-xmin)*Rand();
         // weight = 1-xmin ;
         double f  = g0(x0); 
         double ff = weight*f;
@@ -55,11 +52,12 @@ int main(int argc,char **argv)
     xg0  /= npoints;
     xg00 /= npoints;
     double sigma2 = xg00 - xg0*xg0 ;
-    double error = sqrt(sigma2/npoints) ;
+    double error  = sqrt(sigma2/npoints) ;
     cout<<" integral for g(x) = (1-x)**5/x is: "<<xg0<<"+/-"<< error<<endl;
 
-    //cout << x <<" "<< TMath::BetaIncomplete(x, -1+1, 5 + 1 )  << endl;
-
+    double x = 1-xmin;
+    double b = -0.9999999999, a = 5;
+    cout << "Exact value "<< TMath::BetaIncomplete(x, a+1, b+1) * TMath::Beta(a+1, b+1) << endl;
 
     return EXIT_SUCCESS;
 }

@@ -1,4 +1,4 @@
-#include "ranlxd.h"
+#include "courselib.h"
 #include <cmath>
 #include "TH1.h"
 #include "TFile.h" 
@@ -103,6 +103,7 @@ double suda (double t1, double t2, double x, double y)
 
 int main (int argc,char **argv)
 {
+    TH1::SetDefaultSumw2();
     TApplication* gMyRootApp = new TApplication("My ROOT Application", &argc, argv);
     const int npoints = 100000;
     const int ntmax = 20;
@@ -125,12 +126,8 @@ int main (int argc,char **argv)
         double t2 = tmax; // select here the upper scale t2 = tmax
         // cout << " tmax = "<< t2 << " t1 = "<< t1 << " delta " << delta<< endl;
         for (int n1 = 0; n1 < npoints; ++n1) {
-            const int LVEC = 10;
-            double rvec[LVEC];
-            ranlxd(rvec,LVEC);
-
-            double x1 = rvec[0];
-            double y1 = rvec[1];
+            double x1 = Rand();
+            double y1 = Rand();
             double ff = suda(t1, t2, x1, y1);
             sum0  +=  ff;
             sum00 +=  ff*ff; 
@@ -149,25 +146,19 @@ int main (int argc,char **argv)
         histo1->SetBinError(nt+1, sudError);
     }
 
-    //general root settings 
-    gROOT->Reset();
-    gROOT->SetStyle("Plain");
     gStyle->SetPadTickY(1); // ticks at right side
     gStyle->SetOptStat(0); // get rid of statistics box
+
     TCanvas *c = new TCanvas("ctest", "", 0, 0, 500, 500);
-    // divide the canvas in 1 parts in x and 1 in y
-    c->Divide(1,1);
-    //enter the first part of the canvas (upper left)
-    c->cd(1);
     gPad->SetLogy();
     histo1->Draw();
     c->Draw();
-    c->WaitPrimitive();
     c->Print("example6.pdf");
-    gMyRootApp->SetReturnFromRun(true);
+
     // write histogramm out to file
     TFile file("output-example6.root","RECREATE");
     histo1->Write();
     file.Close();
+    gMyRootApp->Run();
     return EXIT_SUCCESS;
 }
