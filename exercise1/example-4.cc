@@ -27,15 +27,12 @@ int main (int argc,char **argv)
     int nhit = 0;
 
     for (int n1 = 0; n1 < npoints; ++n1) {
-
         // insert here the values for x,y and the rejection condition   
-
         double x = Rand();
         double y = Rand();
 
         if (y < x)    
             ++nhit;
-        //                                  
     }
 
     double Int = double(nhit)/npoints;

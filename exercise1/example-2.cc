@@ -29,7 +29,7 @@ int main (int argc,char **argv)
     const int npoints = 1000000;
 
     //Init histograms for given number of points in sum
-    int pointsA[] = {1, 3, 6, 10, 12, 20, 40};
+    int pointsA[] = {1, 2, 3, 6, 12, 20, 40};
     vector<int> points(pointsA, pointsA + sizeof(pointsA)/sizeof(pointsA[0]));
     vector<TH1D*> histos(points.size());
     for(unsigned i = 0; i < points.size(); ++i) {
