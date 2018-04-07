@@ -2,9 +2,6 @@
 ROOTCFLAGS = $(shell root-config --cflags)
 ROOTLIBS   = $(shell root-config --libs)
 
-#LHAPDF includes + libraries
-LHALIBS = $(shell lhapdf-config --libs)
-LHAINC  = $(shell lhapdf-config --incdir)
 
 #Debugging info + allWarnings + level-3 optimalisation
 CFLAGS=-g -Wall -O3
@@ -15,13 +12,28 @@ all: example-1 example-2 example-3 example-4 example-5 example-lhapdf
 example-%: example-%.cc ranlxd.o
 	g++  $(CFLAGS) $(ROOTCFLAGS)   $^  $(ROOTLIBS)  -o $@ 
 
-example-lhapdf: example-lhapdf.cc ranlxd.o
-	g++  $(CFLAGS) $(ROOTCFLAGS) -I$(LHAINC)  $^  $(ROOTLIBS) $(LHALIBS) -o $@ 
 
 # Rule to compile Ranlux
 ranlxd.o: ranlxd.cc
 	g++  $(CFLAGS) -DSSE -c  $^ -o $@  
 
-
 clean:
 	rm -f *.o example-? example-lhapdf
+
+
+
+#LHAPDF includes + libraries
+ifeq ($(shell which lhapdf-config),"")
+LHALIBS = $(shell lhapdf-config --libdir)
+LHAINC  = $(shell lhapdf-config --incdir)
+else
+LHAdir=/afs/desy.de/user/z/zlebcr/public/mcSchool/lhapdf5/install
+LHALIBS = $(LHAdir)/lib
+LHAINC  = $(LHAdir)/include
+endif
+
+example-lhapdf: example-lhapdf.cc ranlxd.o
+	g++  $(CFLAGS) $(ROOTCFLAGS) -I$(LHAINC)  $^  $(ROOTLIBS) -L$(LHALIBS) -lLHAPDF -Wl,-rpath=$(LHALIBS)   -o $@ 
+
+
+

@@ -1,5 +1,4 @@
-#include "ranlxd.h"
-//#include "courselib.h"
+#include "courselib.h"
 #include <cmath>
 #include "TH1.h"
 #include "TFile.h" 
@@ -10,7 +9,6 @@
 #include <cstdlib>
 
 using namespace std;
-using namespace LHAPDF;
 
 /*
    We calculate the momentum sum rule of a parton density function by performing explicitly the integral.
@@ -35,8 +33,8 @@ int main()
     LHAPDF::initPDFSet(NAME, LHAPDF::LHGRID, SUBSET);
 
     const int npoints = 1000000;
-#define LVEC 2
-    double rvec[LVEC];
+
+
 //  initialise random number generator
 //  rlxd_init( luxory level, seed )
     rlxd_init(2,32767);
@@ -58,12 +56,10 @@ int main()
 
     //const int NUMBER = numberPDF();
 
+    LHAPDF::initPDF(0);
 
-
-    initPDF(0);
-
-    const double xmin = getXmin(0);
-    const double xmax = getXmax(0);
+    const double xmin = LHAPDF::getXmin(0);
+    const double xmax = LHAPDF::getXmax(0);
 
     //      xmax = 0.05 ;
     //      xmin = 0.0001 ;
@@ -71,12 +67,11 @@ int main()
     double sum0=0, sum00=0;
 
     for (int n1 = 0; n1 < npoints; ++n1) {
-        ranlxd(rvec,LVEC);
         // for simple integration
-        // x = xmin + (xmax-xmin)*rvec[0];
+        // x = xmin + (xmax-xmin)*Rand();
         // for importance sampling
-        double xrn = rvec[0];
-        double x = xmin * pow((xmax/xmin), xrn);
+
+        double x = xmin * pow((xmax/xmin), Rand());
         double f=0;
         int flavor;
         // the pdf from LHAPDFLIB is called via: xfx(x,Q,flavor) 
@@ -84,17 +79,21 @@ int main()
         //		     Q = sqrt(q2), the sqrt of the scale
         //		     flavor = -6,.. ,6 the flavor code of the parton, 
         //		     flavor: 0=gluon, 1=down, 2=up, 3=strange, 4=charm, 5=bottom 6=top           
+
         //  sum over all flavors for mom sum rule
         for ( flavor = -6; flavor <= 6; flavor++)
-            f += xfx(x,Q,flavor);
+            f += LHAPDF::xfx(x,Q,flavor);
+
         //  take only flavor 1 (2) for flavor sum rule
         flavor = 1;
-        //            f = (xfx(x,Q,flavor)-xfx(x,Q,-flavor))/x;
+        //f = (LHAPDF::xfx(x,Q,flavor) - LHAPDF::xfx(x,Q,-flavor))/x;
+
         //  take only gluon for gluon momentum fraction
         flavor = 0;
-        f = xfx(x,Q,flavor);
+        //f = LHAPDF::xfx(x,Q,flavor);
+
         // for simple integration
-        //            ff = f*(xmax-xmin);
+        // ff = f*(xmax-xmin);
         // for importance sampling
         //      divide f(x) with g(x) = 1/x since we generate x according to g(x). 
         double ff = f*x*log(xmax/xmin);
