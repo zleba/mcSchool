@@ -32,7 +32,7 @@ int main()
     const string NAME = "MRSTMCal";			// LO** pdf //
     LHAPDF::initPDFSet(NAME, LHAPDF::LHGRID, SUBSET);
 
-    const int npoints = 1000000;
+    const int npoints = 100000;
 
 
 //  initialise random number generator

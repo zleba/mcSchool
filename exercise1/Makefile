@@ -10,12 +10,12 @@ all: example-1 example-2 example-3 example-4 example-5 example-lhapdf
 
 # Rule to compile examples
 example-%: example-%.cc ranlxd.o
-	g++  $(CFLAGS) $(ROOTCFLAGS)   $^  $(ROOTLIBS)  -o $@ 
+	g++ $(CFLAGS) $(ROOTCFLAGS)   $^  $(ROOTLIBS)  -o $@ 
 
 
 # Rule to compile Ranlux
 ranlxd.o: ranlxd.cc
-	g++  $(CFLAGS) -DSSE -c  $^ -o $@  
+	g++ $(CFLAGS) -DSSE -c  $^ -o $@  
 
 clean:
 	rm -f *.o example-? example-lhapdf
@@ -23,8 +23,8 @@ clean:
 
 
 #LHAPDF includes + libraries
-SVN_INFO := $(shell which lhapdf-config 1>&2 2> /dev/null; echo $$?)
-ifeq ($(SVN_INFO),0)
+isLHA := $(shell which lhapdf-config > /dev/null; echo $$?)
+ifeq ($(isLHA),0)
 LHALIBS = $(shell lhapdf-config --libdir)
 LHAINC  = $(shell lhapdf-config --incdir)
 else
@@ -35,6 +35,4 @@ endif
 
 example-lhapdf: example-lhapdf.cc ranlxd.o
 	g++  $(CFLAGS) $(ROOTCFLAGS) -I$(LHAINC)  $^  $(ROOTLIBS) -L$(LHALIBS) -lLHAPDF -Wl,-rpath=$(LHALIBS)   -o $@ 
-
-
 
