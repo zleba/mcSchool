@@ -25,3 +25,8 @@ cd exercise1
 ./runDocker make  #Compiles all examples
 ./runDocker ./example-1 #run example-1
 ```
+You may need to install docker on your computer (in case of Ubuntu):
+
+```
+sudo apt install docker.io
+```
