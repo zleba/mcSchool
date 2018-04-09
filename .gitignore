@@ -1,0 +1,6 @@
+*.pdf
+*.root
+*.o
+example-[1-9]
+example-lhapdf
+
