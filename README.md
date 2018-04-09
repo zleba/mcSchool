@@ -12,7 +12,7 @@ unzip master.zip
 ```
 Requires ROOT and in one case LHAPDF.
 
-Standardly compile using make
+Standardly compile using make and run afterwards
 ```
 cd exercise1
 make
