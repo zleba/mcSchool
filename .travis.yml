@@ -9,5 +9,5 @@ before_install:
 
 script:
     - cd exercise1
-    - ./runDocker make exercise-1
+    - ./runDocker make example-1
     - ./runDocker ./example-1
