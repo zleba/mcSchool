@@ -87,6 +87,6 @@ int main (int argc,char **argv)
         histos[iH]->Write();
 
     file.Close();
-    gMyRootApp->Run();
+    if(!gROOT->IsBatch()) gMyRootApp->Run();
     return EXIT_SUCCESS;
 }
