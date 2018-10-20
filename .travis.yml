@@ -1,0 +1,13 @@
+sudo: required
+
+services:
+    - docker
+
+before_install:
+    - docker pull zleba/rootlhapdf
+    - docker images
+
+script:
+    - cd exercise1
+    - ./runDocker make exercise-1
+    - ./runDocker ./exercise-1
