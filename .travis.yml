@@ -30,8 +30,9 @@ deploy:
   github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
   keep-history: true
   script:
-    - git add exercise1/*.pdf
-    - git commit -m "adding pdfs"
+    - ls -R
+#    - git add exercise1/*.pdf
+#    - git commit -m "adding pdfs"
   on:
     branch: master
 
