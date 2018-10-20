@@ -22,6 +22,15 @@ script:
     - ./runDocker ./example-3
     - ./runDocker ./example-4
 
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep-history: true
+  on:
+    branch: master
+
+
 
 #jobs:
 #    include:
