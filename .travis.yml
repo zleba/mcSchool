@@ -9,5 +9,11 @@ before_install:
 
 script:
     - cd exercise1
-    - ./runDocker make example-1
+    - ./runDocker make -j2 all
     - ./runDocker ./example-1
+    - ./runDocker ./example-2
+    - ./runDocker ./example-3
+    - cd exercise2
+    - ./runDocker make -j2 all
+    - cd exercise3
+    - ./runDocker make -j2 all
