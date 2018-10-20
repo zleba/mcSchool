@@ -21,12 +21,17 @@ script:
     - ./runDocker ./example-2
     - ./runDocker ./example-3
     - ./runDocker ./example-4
+    - ./runDocker ./example-5
+    - ./runDocker ./example-lhapdf
 
 deploy:
   provider: pages
   skip-cleanup: true
   github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
   keep-history: true
+  script:
+    - git add exercise1/*.pdf
+    - git commit -m "adding pdfs"
   on:
     branch: master
 
