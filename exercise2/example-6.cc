@@ -159,6 +159,6 @@ int main (int argc,char **argv)
     TFile file("output-example6.root","RECREATE");
     histo1->Write();
     file.Close();
-    gMyRootApp->Run();
+    if(!gROOT->IsBatch()) gMyRootApp->Run();
     return EXIT_SUCCESS;
 }

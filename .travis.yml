@@ -17,15 +17,24 @@ script:
     - ./runDocker make -j2 all
 
     - cd ../exercise1
-    - ./runDocker ./example-1
-    - ./runDocker ./example-2
-    - ./runDocker ./example-3
-    - ./runDocker ./example-4
-    - ./runDocker ./example-5
-    - ./runDocker ./example-lhapdf
+    - ./runDocker ./example-1 | tee example1.txt
+    - ./runDocker ./example-2 | tee example2.txt
+    - ./runDocker ./example-3 | tee example3.txt
+    - ./runDocker ./example-4 | tee example4.txt
+    - ./runDocker ./example-5 | tee example5.txt
+    - ./runDocker ./example-lhapdf | tee examplelhapdf.txt
+    - cd ../exercise2
+    - ./runDocker ./example-6 | tee example6.txt
+    - ./runDocker ./example-7 | tee example7.txt
+    - cd ../exercise3
+    - ./runDocker ./example-8 | tee example8.txt
+    - ./runDocker ./example-9 | tee example9.txt
+
     - cd ..
     - mkdir public
-    - cp exercise1/*.pdf public
+    - cp exercise1/*.pdf exercise1/*.txt public
+    - cp exercise2/*.pdf exercise2/*.txt public
+    - cp exercise3/*.pdf exercise3/*.txt public
     - ls public/*
 
 deploy:
@@ -33,7 +42,7 @@ deploy:
   local-dir : public
   skip-cleanup: true
   github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-  keep-history: true
+  keep-history: false
   on:
     branch: master
 

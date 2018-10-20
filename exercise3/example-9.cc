@@ -223,6 +223,6 @@ int main(int argc,char **argv)
     histo7->Write();
     file.Close();
 
-    gMyRootApp->Run();
+    if(!gROOT->IsBatch()) gMyRootApp->Run();
     return EXIT_SUCCESS;
     }

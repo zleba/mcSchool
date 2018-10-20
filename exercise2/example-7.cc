@@ -237,6 +237,6 @@ int main(int argc,char **argv)
     histo4->Write();
     file.Close();
 
-    gMyRootApp->Run();
+    if(!gROOT->IsBatch()) gMyRootApp->Run();
     return EXIT_SUCCESS;
 }
