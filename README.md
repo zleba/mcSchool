@@ -1,4 +1,5 @@
 # mcSchool
+[![Build Status](https://travis-ci.org/zleba/mcSchool.svg?branch=master)](https://travis-ci.org/zleba/mcSchool)
 
 Use
 ```
