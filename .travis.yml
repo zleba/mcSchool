@@ -8,19 +8,29 @@ before_install:
     - docker images
 
 
-jobs:
-    include:
-        - stage: build
-        script:
-        - cd exercise1
-        - ./runDocker make -j2 all
-        - cd ../exercise2
-        - ./runDocker make -j2 all
-        - cd ../exercise3
-        - ./runDocker make -j2 all
-        - stage: run
-        script:
-        - cd ../exercise1
-        - ./runDocker ./example-1
-        - ./runDocker ./example-2
-        - ./runDocker ./example-3
+script:
+    - cd exercise1
+    - ./runDocker make -j2 all
+    - cd ../exercise2
+    - ./runDocker make -j2 all
+    - cd ../exercise3
+    - ./runDocker make -j2 all
+
+
+
+#jobs:
+#    include:
+#        - stage: build
+#        script:
+#        - cd exercise1
+#        - ./runDocker make -j2 all
+#        - cd ../exercise2
+#        - ./runDocker make -j2 all
+#        - cd ../exercise3
+#        - ./runDocker make -j2 all
+#        - stage: run
+#        script:
+#        - cd ../exercise1
+#        - ./runDocker ./example-1
+#        - ./runDocker ./example-2
+#        - ./runDocker ./example-3
