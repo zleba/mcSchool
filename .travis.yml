@@ -16,10 +16,11 @@ script:
     - cd ../exercise3
     - ./runDocker make -j2 all
 
-    - cd .../exercise1
+    - cd ../exercise1
     - ./runDocker ./example-1
     - ./runDocker ./example-2
     - ./runDocker ./example-3
+    - ./runDocker ./example-4
 
 
 #jobs:
