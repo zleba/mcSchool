@@ -32,6 +32,7 @@ void gauss2D (double sigma, double &kx, double &ky)
 {
     double kT  = sigma * sqrt(-2*log(Rand()));
     double phi = 2*M_PI * Rand();
+
     kx = kT*cos(phi);
     ky = kT*sin(phi);
 }
@@ -42,7 +43,7 @@ void get_starting_pdf (double xmin, double q2, double& weightx, double& x, doubl
 
     // get x value according to g(x)\sim 1/x            
     x = xmin*pow(xmax/xmin, Rand());
-    // use: xg(x) = 3 (1-x)**5
+    // use: g(x) = 3 (1-x)**5 / x
 
     double pdf     = pow(1-x, 5) * 3./x;
     weightx = x*log(xmax/xmin) * pdf ;
@@ -79,10 +80,16 @@ void splitting(double& z, double& weightz)
 {
     const double epsilon = 0.1;
 
+    //error ~ C / sqrt(Nevents)
+    //z = epsilon + (1 - 2*epsilon) *Rand();
+    //weightz = as2pi* 6 (1./z + 1./(1.-z));
+    //return;
+
     double as2pi = 0.1/2./M_PI;
 
 //		here we calculate  the splitting variable z for 1/z and  1/(1-z)
-//		use Pgg=6 (1./z + 1./(1.-z))
+//		use Pgg=6./z 
+// + 6./(1.-z))  // z -> 1-z
 
     double g0 = 6.*as2pi * log((1.-epsilon)/epsilon);
     double g1 = 6.*as2pi * log((1.-epsilon)/epsilon);
