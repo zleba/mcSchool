@@ -35,8 +35,9 @@ script:
     - ./rd make exerciseHtml/example-1.html
     - ./rd make exerciseHtml/example-2.html
     - ./rd make exerciseHtml/example-3.html
-    - mkdir -p public/Html
+    - mkdir -p public/Html public/Nb
     - cp exerciseHtml/*.html  public/Html
+    - cp exerciseNb/*.ipynb   public/Nb
 
 
 deploy:
