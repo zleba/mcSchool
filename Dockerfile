@@ -10,6 +10,9 @@ COPY installLHA.sh .
 RUN ./installLHA.sh
 ENV PATH="/lhapdf/install/bin/:${PATH}"
 
+ENV PYTHONPATH="/lhapdf/install/lib/python2.7/site-packages/:${PYTHONPATH}"
+ENV LD_LIBRARY_PATH="/lhapdf/install/lib/:${LD_LIBRARY_PATH}"
+
 ENV PYTHONPATH="/usr/local/lib/root:${PYTHONPATH}"
 RUN  apt-get update &&  apt-get install -y python-pip
 COPY requirements.txt .
