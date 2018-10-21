@@ -7,15 +7,16 @@ allhtml: exerciseHtml/example-1.html exerciseHtml/example-2.html exerciseHtml/ex
 #
 
 exerciseHtml/example-%.html: exerciseNb/example-%.ipynb
-	jupyter nbconvert --to html --execute $^ --output ../$@
+	jupyter nbconvert --to html  $^ --output ../$@
 exerciseHtml/example-lhapdf.html: exerciseNb/example-lhapdf.ipynb
-	jupyter nbconvert --to html --execute $^ --output ../$@
+	jupyter nbconvert --to html  $^ --output ../$@
+    #jupyter nbconvert --to notebook --execute mynotebook.ipynb --output mynotebook.ipynb
 
 
 exerciseNb/example-%.ipynb: exerciseMd/example-%.md
-	notedown $^ > $@
+	notedown  $^ --run > $@
 exerciseNb/example-lhapdf.ipynb: exerciseMd/example-lhapdf.md
-	notedown $^ > $@
+	notedown $^ --run > $@
 
 #clean:
 	#rm -f *.html *.ipynb
