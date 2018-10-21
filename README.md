@@ -1,6 +1,10 @@
 # mcSchool
 [![Build Status](https://travis-ci.org/zleba/mcSchool.svg?branch=master)](https://travis-ci.org/zleba/mcSchool)
 
+Check the jupyter version of the excercise
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/zleba/mcSchool/master)
+
+
 Use
 ```
 git clone git@github.com:zleba/mcSchool.git
