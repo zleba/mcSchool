@@ -25,9 +25,16 @@ script:
     - ./rd ./example-8 | tee example8.txt
     - ./rd ./example-9 | tee example9.txt
 
-    - mkdir ../public
-    - cp *.pdf *.txt ../public
-    - ls ../public/*
+    - mkdir -p ../public/cpp
+    - cp *.pdf *.txt ../public/cpp
+    - ls ../public/cpp/*
+
+#Test Py
+    - cd ../exercisePy
+    - ./rd make example-1.html
+    - mkdir -p ../public/py
+    - cp *.html  ../public/py
+
 
 deploy:
   provider: pages
