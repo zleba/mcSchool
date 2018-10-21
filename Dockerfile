@@ -14,8 +14,7 @@ RUN  apt-get update &&  apt-get install -y python-pip
 COPY requirements.txt .
 RUN  sudo -H pip install --upgrade pip && sudo -H pip install --trusted-host pypi.python.org -r requirements.txt
 
-RUN mkdir -p /tmp/notebooks
-ENV HOME=/tmp/notebooks
+ENV HOME=/tmp
 WORKDIR ${HOME}
 COPY exercisePy/*.ipynb .
 
