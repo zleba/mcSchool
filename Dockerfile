@@ -23,7 +23,7 @@ WORKDIR ${HOME}
 RUN rm -f /tmp/* && mkdir -p ${HOME}/exerciseNb
 COPY Makefile   ${HOME}/
 COPY exerciseMd ${HOME}/exerciseMd
-RUN  make all 
+RUN  make all  && rm -f Makefile
 
 # When starting the container and no command is started, run bash
 #CMD ["/bin/bash"]
