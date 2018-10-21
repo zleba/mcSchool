@@ -6,9 +6,10 @@ USER root
 
 #Instal LHAPDF
 WORKDIR /
-#COPY installLHA.sh .
-#RUN ./installLHA.sh
-#ENV PATH="/lhapdf/install/bin/:${PATH}"
+COPY installLHA.sh .
+RUN ./installLHA.sh
+ENV PATH="/lhapdf/install/bin/:${PATH}"
+
 ENV PYTHONPATH="/usr/local/lib/root:${PYTHONPATH}"
 RUN  apt-get update &&  apt-get install -y python-pip
 COPY requirements.txt .
