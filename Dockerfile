@@ -15,4 +15,5 @@ COPY requirements.txt .
 RUN  sudo -H pip install --upgrade pip && sudo -H pip install --trusted-host pypi.python.org -r requirements.txt
 
 # When starting the container and no command is started, run bash
-CMD ["/bin/bash"]
+#CMD ["/bin/bash"]
+CMD ["jupyter", "notebook", "--allow-root", "--ip", "0.0.0.0"]
