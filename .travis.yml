@@ -31,11 +31,12 @@ script:
     - ls ../public/cpp/*
 
 #Test Py
-    - cd ../exercisePy
-    - ./rd make example-1.html
-    - ./rd make example-2.html
-    - mkdir -p ../public/py
-    - cp *.html  ../public/py
+    - cd ..
+    - ./rd make exerciseHtml/example-1.html
+    - ./rd make exerciseHtml/example-2.html
+    - ./rd make exerciseHtml/example-3.html
+    - mkdir -p ../public/Html
+    - cp exerciseHtml/*.html  ../public/Html
 
 
 deploy:
