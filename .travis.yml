@@ -8,35 +8,26 @@ before_install:
     - docker images
 
 
-
 script:
-    - cd exercise1
-    - ./runDocker make -j2 all
-    - cd ../exercise2
-    - ./runDocker make -j2 all
-    - cd ../exercise3
-    - ./runDocker make -j2 all
+#Compile it
+    - cd exerciseCpp
+    - ./rd make -j2 all
 
-    - cd ../exercise1
-    - ./runDocker ./example-1 | tee example1.txt
-    - ./runDocker ./example-2 | tee example2.txt
-    - ./runDocker ./example-3 | tee example3.txt
-    - ./runDocker ./example-4 | tee example4.txt
-    - ./runDocker ./example-5 | tee example5.txt
-    - ./runDocker ./example-lhapdf | tee examplelhapdf.txt
-    - cd ../exercise2
-    - ./runDocker ./example-6 | tee example6.txt
-    - ./runDocker ./example-7 | tee example7.txt
-    - cd ../exercise3
-    - ./runDocker ./example-8 | tee example8.txt
-    - ./runDocker ./example-9 | tee example9.txt
+#Test it
+    - ./rd ./example-1 | tee example1.txt
+    - ./rd ./example-2 | tee example2.txt
+    - ./rd ./example-3 | tee example3.txt
+    - ./rd ./example-4 | tee example4.txt
+    - ./rd ./example-5 | tee example5.txt
+    - ./rd ./example-lhapdf | tee examplelhapdf.txt
+    - ./rd ./example-6 | tee example6.txt
+    - ./rd ./example-7 | tee example7.txt
+    - ./rd ./example-8 | tee example8.txt
+    - ./rd ./example-9 | tee example9.txt
 
-    - cd ..
-    - mkdir public
-    - cp exercise1/*.pdf exercise1/*.txt public
-    - cp exercise2/*.pdf exercise2/*.txt public
-    - cp exercise3/*.pdf exercise3/*.txt public
-    - ls public/*
+    - mkdir ../public
+    - cp *.pdf *.txt ../public
+    - ls ../public/*
 
 deploy:
   provider: pages
