@@ -1,5 +1,5 @@
-all:     exerciseNb/example-1.ipynb exerciseNb/example-2.ipynb exerciseNb/example-3.ipynb exerciseNb/example-4.ipynb exerciseNb/example-5.ipynb exerciseNb/example-lhapdf.ipynb
-allhtml: exerciseHtml/example-1.html exerciseHtml/example-2.html exerciseHtml/example-3.html exerciseHtml/example-4.html exerciseHtml/example-5.html exerciseHtml/example-lhapdf.html
+all:     exerciseNb/example-1.ipynb exerciseNb/example-2.ipynb exerciseNb/example-3.ipynb exerciseNb/example-4.ipynb exerciseNb/example-5.ipynb exerciseNb/example-lhapdf.ipynb  exerciseNb/example-6.ipynb exerciseNb/example-8.ipynb
+allhtml: exerciseHtml/example-1.html exerciseHtml/example-2.html exerciseHtml/example-3.html exerciseHtml/example-4.html exerciseHtml/example-5.html exerciseHtml/example-lhapdf.html  exerciseHtml/example-6.html exerciseHtml/example-8.html
 
 #
 #example-%.py: example-%.ipynb

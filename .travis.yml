@@ -35,6 +35,11 @@ script:
     - ./rd make exerciseHtml/example-1.html
     - ./rd make exerciseHtml/example-2.html
     - ./rd make exerciseHtml/example-3.html
+    - ./rd make exerciseHtml/example-4.html
+    - ./rd make exerciseHtml/example-5.html
+    - ./rd make exerciseHtml/example-6.html
+    - ./rd make exerciseHtml/example-8.html
+    - ./rd make exerciseHtml/example-lhapdf.html
     - mkdir -p public/Html public/Nb
     - cp exerciseHtml/*.html  public/Html
     - cp exerciseNb/*.ipynb   public/Nb
