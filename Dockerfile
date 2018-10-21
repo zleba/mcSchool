@@ -18,7 +18,7 @@ ENV HOME=/tmp
 WORKDIR ${HOME}
 RUN rm -f /tmp/*
 COPY exercisePy/*.md  exercisePy/Makefile ${HOME}/
-RUN  make all && rm Makefile
+RUN  make all && rm -f Makefile *.md
 
 # When starting the container and no command is started, run bash
 #CMD ["/bin/bash"]
