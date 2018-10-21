@@ -1,8 +1,11 @@
-example-1.html: example-1.ipynb
+example-%.html: example-%.ipynb
 	jupyter nbconvert --to html --execute $^ --output $@
 
-example-1.ipynb: example-1.md
+example-%.py: example-%.ipynb
+	jupyter nbconvert --to python $^
+
+example-%.ipynb: example-%.md
 	notedown $^ > $@
 
-clean:
-	rm -f *.html *.ipynb
+#clean:
+	#rm -f *.html *.ipynb
