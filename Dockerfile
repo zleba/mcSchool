@@ -6,9 +6,13 @@ USER root
 
 #Instal LHAPDF
 WORKDIR /
-COPY installLHA.sh .
-RUN ./installLHA.sh
-ENV PATH="/lhapdf/install/bin/:${PATH}"
+#COPY installLHA.sh .
+#RUN ./installLHA.sh
+#ENV PATH="/lhapdf/install/bin/:${PATH}"
+ENV PYTHONPATH="/usr/local/lib/root:${PYTHONPATH}"
+RUN  apt-get update &&  apt-get install -y python-pip
+COPY requirements.txt .
+RUN  sudo -H pip install --upgrade pip && sudo -H pip install --trusted-host pypi.python.org -r requirements.txt
 
 # When starting the container and no command is started, run bash
 CMD ["/bin/bash"]
