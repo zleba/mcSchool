@@ -27,8 +27,8 @@ make
 In case that ROOT and/or LHAPDF is not in your machine, you can use Docker image which contains everything required:
 ```
 cd exercise1
-./runDocker make
-./runDocker ./example-1
+./rd make
+./rd ./example-1
 ```
 You may need to install docker on your computer (in case of Ubuntu):
 

@@ -1,3 +1,4 @@
+all: example-1.ipynb example-2.ipynb
 example-%.html: example-%.ipynb
 	jupyter nbconvert --to html --execute $^ --output $@
 
