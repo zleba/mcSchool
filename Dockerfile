@@ -14,8 +14,10 @@ RUN  apt-get update &&  apt-get install -y python-pip
 COPY requirements.txt .
 RUN  sudo -H pip install --upgrade pip && sudo -H pip install --trusted-host pypi.python.org -r requirements.txt
 
-ENV HOME=/tmp
+RUN mkdir -p /tmp/notebooks
+ENV HOME=/tmp/notebooks
 WORKDIR ${HOME}
+COPY exercisePy/*.ipynb .
 
 # When starting the container and no command is started, run bash
 #CMD ["/bin/bash"]
