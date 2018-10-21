@@ -10,7 +10,7 @@ curl -L http://www.hepforge.org/archive/lhapdf/$lha.tar.gz  | tar zx
 cd $lha
 
 ./configure --prefix=$pwd/install
-make
+make -j2
 make install
 
 #Download few PDFs
