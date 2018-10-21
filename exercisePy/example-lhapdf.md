@@ -1,3 +1,5 @@
+# Playing with parton densities
+## Checking the sum rules
 Imprort ROOT, math functions, lhapdf
 ```
 from ROOT import gRandom
@@ -45,4 +47,33 @@ error = sqrt(sigma2/npoints)
 And finally result:
 ```
 print " momentum sum rule is: ", sum0, "+/-", error
+```
+## Plot some PDFs for fun
+Import what is needed
+```
+from ROOT import TGraph, TCanvas, kRed
+```
+Evaluate the gluon and up-quark pdf at the xPoints with logaritmic spacing
+```
+n = 100
+xPoints = [10**(5*x/float(n)) for x in range(-n,0) ]
+gPoints = [pdf.xfxQ(0, x, Q) for x in xPoints ] # 0 for gluon
+uPoints = [pdf.xfxQ(2, x, Q) for x in xPoints ] # 2 for up-quark
+```
+Fill the TGraph object with the values of the lists above
+```
+grG,grU = TGraph(), TGraph()
+for i in range(n):
+    grG.SetPoint(i, xPoints[i], gPoints[i])
+    grU.SetPoint(i, xPoints[i], uPoints[i])
+```
+Plotting
+```
+c = TCanvas()
+c.SetLogx();
+c.SetLogy();
+grG.SetLineColor(kRed)
+grG.Draw("alp")
+grU.Draw("lp same")
+c.Draw()
 ```

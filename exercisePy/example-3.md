@@ -1,4 +1,4 @@
-## MC integration
+# MC integration
 Define function which we want to integrate
 
 ```python

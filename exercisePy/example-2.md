@@ -1,4 +1,4 @@
-## Demonstration of the cental limit theorem
+# Demonstration of the cental limit theorem
 
 First import what is needed
 

@@ -1,4 +1,4 @@
-## Example on the importance sampling usage
+# Example on the importance sampling usage
 Import what will be needed
 ```
 from ROOT import gRandom, TMath

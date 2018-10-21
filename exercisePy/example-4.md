@@ -1,4 +1,4 @@
-## Demonstration of hit & mis method
+# Demonstration of hit & mis method
 Import what is needed
 ```
 from ROOT import gRandom
