@@ -1,4 +1,4 @@
-INPUT  = $(wildcard exerciseMd/example-[1-8].md) # exerciseMd/example-lhapdf.md
+INPUT  = $(wildcard exerciseMd/example-[1-8].md)  exerciseMd/example-lhapdf.md
 NbOutT = $(subst Md,Nb,${INPUT})
 NbOut  = $(subst md,ipynb,${NbOutT})
 NbOutD = $(subst Nb,NbExec,${NbOut})
@@ -20,7 +20,7 @@ exerciseNbExec/example-lhapdf.ipynb: exerciseNb/example-lhapdf.ipynb
 exercisePy/example-%.py: exerciseNb/example-%.ipynb
 	jupyter nbconvert --to python   $^ --output ../$@
 exercisePy/example-lhapdf.py: exerciseNb/example-lhapdf.ipynb
-	jupyter nbconvert   --to python  $^ --output ../$@
+	jupyter nbconvert --to python  $^ --output ../$@
 
 
 exerciseNb/example-%.ipynb: exerciseMd/example-%.md

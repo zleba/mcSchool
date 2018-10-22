@@ -8,7 +8,7 @@ import lhapdf
 ```
 Import the pdf by name, try also "MRST2004nlo" or "MRST2007lomod" (LO)
 ```
-name = "MRSTMCal"	
+name = "MRST2007lomod"	
 pdf = lhapdf.getPDFSet(name).mkPDF(0)
 ```
 We will evaluate the sum rule at scale 10 GeV 
