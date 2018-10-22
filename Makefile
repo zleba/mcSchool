@@ -8,7 +8,7 @@ allPy:     exercisePy/example-1.py exercisePy/example-2.py exercisePy/example-3.
 #
 
 exerciseNbDone/example-%.ipynb: exerciseNb/example-%.ipynb
-	jupyter nbconvert --to notebook --execute  $^ --output ../$@
+	jupyter nbconvert  --ExecutePreprocessor.timeout=80 --to notebook --execute  $^ --output ../$@
 exerciseNbDone/example-lhapdf.ipynb: exerciseNb/example-lhapdf.ipynb
 	jupyter nbconvert  --ExecutePreprocessor.timeout=80 --to notebook --execute  $^ --output ../$@
 
