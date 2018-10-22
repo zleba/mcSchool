@@ -18,10 +18,10 @@ RUN  apt-get update &&  apt-get install -y python-pip
 COPY requirements.txt .
 RUN  sudo -H pip install --upgrade pip && sudo -H pip install --trusted-host pypi.python.org -r requirements.txt
 
-RUN useradd -ms /bin/bash jupyter
+RUN useradd -ms /bin/bash {NB_USER}
 ENV HOME=/home/jupyter
 WORKDIR ${HOME}
-USER jupyter
+USER ${NB_USER}
 RUN mkdir .jupyter && echo "c.NotebookApp.token = ''" > ${HOME}/.jupyter/jupyter_notebook_config.py
 RUN  mkdir -p ${HOME}/exerciseNb  -p ${HOME}/exerciseNbExec
 COPY exerciseNb ${HOME}/exerciseNb
