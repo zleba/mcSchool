@@ -18,11 +18,15 @@ RUN  apt-get update &&  apt-get install -y python-pip
 COPY requirements.txt .
 RUN  sudo -H pip install --upgrade pip && sudo -H pip install --trusted-host pypi.python.org -r requirements.txt
 
-ENV  NB_USER=jovyan
-RUN useradd -ms /bin/bash jovyan
-ENV HOME=/home/jovyan
+ENV NB_USER=jovyan
+ENV NB_UID 1000
+ENV HOME /home/${NB_USER}
+
+RUN adduser --disabled-password --gecos "Default user" \
+            --uid ${NB_UID} ${NB_USER}
+
 WORKDIR ${HOME}
-USER jovyan
+USER ${NB_USER}
 RUN mkdir .jupyter && echo "c.NotebookApp.token = ''" > ${HOME}/.jupyter/jupyter_notebook_config.py
 RUN  mkdir -p ${HOME}/exerciseNb  -p ${HOME}/exerciseNbExec
 COPY exerciseNb ${HOME}/exerciseNb
