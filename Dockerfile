@@ -21,7 +21,6 @@ RUN  sudo -H pip install --upgrade pip && sudo -H pip install --trusted-host pyp
 ENV HOME=/tmp
 WORKDIR ${HOME}
 RUN rm -f /tmp/* && mkdir -p ${HOME}/exerciseNb  -p ${HOME}/exerciseNbDone
-COPY exerciseMd ${HOME}/exerciseMd
 COPY exerciseNb ${HOME}/exerciseNb
 COPY exerciseNbDone ${HOME}/exerciseNbDone
 
