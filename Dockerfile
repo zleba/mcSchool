@@ -18,7 +18,8 @@ RUN  apt-get update &&  apt-get install -y python-pip
 COPY requirements.txt .
 RUN  sudo -H pip install --upgrade pip && sudo -H pip install --trusted-host pypi.python.org -r requirements.txt
 
-RUN useradd -ms /bin/bash {NB_USER}
+ENV  NB_USER=jovyan
+RUN useradd -ms /bin/bash ${NB_USER}
 ENV HOME=/home/jupyter
 WORKDIR ${HOME}
 USER ${NB_USER}
