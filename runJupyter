@@ -1,0 +1,2 @@
+#sudo docker run --rm -p80:8888 zleba/rootlhapdf
+sudo docker run --rm -p80:8888 zleba/rootlhapdf jupyter lab --ip 0.0.0.0

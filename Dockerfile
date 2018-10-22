@@ -28,10 +28,10 @@ RUN adduser --disabled-password --gecos "Default user" \
 WORKDIR ${HOME}
 USER ${NB_USER}
 RUN mkdir .jupyter && echo "c.NotebookApp.token = ''" > ${HOME}/.jupyter/jupyter_notebook_config.py
-RUN  cat  .jupyter/jupyter_notebook_config.py &&  mkdir -p ${HOME}/exerciseNb  -p ${HOME}/exerciseNbExec
+RUN  mkdir -p ${HOME}/exerciseNb  -p ${HOME}/exerciseNbExec
 COPY exerciseNb ${HOME}/exerciseNb
 COPY exerciseNbExec ${HOME}/exerciseNbExec
-#EXPOSE 8888
+EXPOSE 8888
 
 # When starting the container and no command is started, run bash
 #CMD ["/bin/bash"]

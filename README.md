@@ -1,7 +1,8 @@
 # mcSchool
 [![Build Status](https://travis-ci.org/zleba/mcSchool.svg?branch=master)](https://travis-ci.org/zleba/mcSchool)
+## Online running with Jupyter
 
-Check the jupyter version of the excercise  
+Check the Jupyter version of the excercise  
 Check and run the Jupyter notebooks here: [nbViewer](https://nbviewer.jupyter.org/github/zleba/mcSchool/tree/master/exerciseNb) [myBinder](https://mybinder.org/v2/gh/zleba/mcSchool/master?filepath=exerciseNb)  
 Or the executed version: [nbViewer](https://nbviewer.jupyter.org/github/zleba/mcSchool/tree/master/exerciseNbExec) [myBinder](https://mybinder.org/v2/gh/zleba/mcSchool/master?filepath=exerciseNbExec)
 
