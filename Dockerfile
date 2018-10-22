@@ -20,7 +20,7 @@ RUN  sudo -H pip install --upgrade pip && sudo -H pip install --trusted-host pyp
 
 ENV  NB_USER=jovyan
 RUN useradd -ms /bin/bash ${NB_USER}
-ENV HOME=/home/jupyter
+ENV HOME=/home/{NB_USER}
 WORKDIR ${HOME}
 USER ${NB_USER}
 RUN mkdir .jupyter && echo "c.NotebookApp.token = ''" > ${HOME}/.jupyter/jupyter_notebook_config.py
