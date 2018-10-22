@@ -19,10 +19,10 @@ COPY requirements.txt .
 RUN  sudo -H pip install --upgrade pip && sudo -H pip install --trusted-host pypi.python.org -r requirements.txt
 
 ENV  NB_USER=jovyan
-RUN useradd -ms /bin/bash ${NB_USER}
-ENV HOME=/home/{NB_USER}
+RUN useradd -ms /bin/bash jovyan
+ENV HOME=/home/jovyan
 WORKDIR ${HOME}
-USER ${NB_USER}
+USER jovyan
 RUN mkdir .jupyter && echo "c.NotebookApp.token = ''" > ${HOME}/.jupyter/jupyter_notebook_config.py
 RUN  mkdir -p ${HOME}/exerciseNb  -p ${HOME}/exerciseNbExec
 COPY exerciseNb ${HOME}/exerciseNb
