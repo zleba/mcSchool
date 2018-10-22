@@ -1,11 +1,11 @@
-INPUT  = $(wildcard exerciseMd/example-[1-8].md)
+INPUT  = $(wildcard exerciseMd/example-[1-8].md) # exerciseMd/example-lhapdf.md
 NbOutT = $(subst Md,Nb,${INPUT})
 NbOut  = $(subst md,ipynb,${NbOutT})
 NbOutD = $(subst Nb,NbDone,${NbOut})
 
 all:   ${NbOut}  # exerciseNb/example-lhapdf.ipynb
 allRun: ${NbOutD}  #exerciseNbDone/example-lhapdf.ipynb
-allPy:     exercisePy/example-1.py exercisePy/example-2.py exercisePy/example-3.py exercisePy/example-4.py exercisePy/example-5.py   exercisePy/example-6.py   exercisePy/example-7.py  exercisePy/example-8.py  #exercisePy/example-lhapdf.py
+allPy:     exercisePy/example-1.py exercisePy/example-2.py exercisePy/example-3.py exercisePy/example-4.py exercisePy/example-5.py   exercisePy/example-6.py   exercisePy/example-7.py  exercisePy/example-8.py  exercisePy/example-lhapdf.py
 
 #
 #example-%.py: example-%.ipynb

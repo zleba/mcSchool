@@ -2,8 +2,12 @@
 [![Build Status](https://travis-ci.org/zleba/mcSchool.svg?branch=master)](https://travis-ci.org/zleba/mcSchool)
 
 Check the jupyter version of the excercise
-[![Binder](https://mybinder.org/badge.svg)](https://hub.mybinder.org/user/zleba-mcschool-16lb7610/tree/Nb)
-[![NBviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/zleba/mcSchool/tree/master/exerciseNb/)
+Run the Jupyter notebooks here:
+https://hub.mybinder.org/user/zleba-mcschool-4mdvkssa/tree/exerciseNb
+https://nbviewer.jupyter.org/github/zleba/mcSchool/tree/master/exerciseNb
+Or the finished version:
+https://hub.mybinder.org/user/zleba-mcschool-4mdvkssa/tree/exerciseNbDone
+https://nbviewer.jupyter.org/github/zleba/mcSchool/tree/master/exerciseNbDone
 
 
 Use
