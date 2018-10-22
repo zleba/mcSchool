@@ -9,8 +9,8 @@ from  ROOT import TH2D, TCanvas, gRandom
 Define the 2D histograms to display the correlation between random numbers
 
 ```python
-histo1 = TH2D("congruental random numbers","congruental random numbers ",100, 0, 1, 100, 0, 1)
-histo2 = TH2D("RANLUX","RANLUX",100, 0, 1, 100, 0, 1)
+histo1 = TH2D("congruent", "congruental random numbers ",100, 0, 1, 100, 0, 1)
+histo2 = TH2D("RANLUX", "RANLUX",100, 0, 1, 100, 0, 1)
 ```
 
 Define our first congruent generator
@@ -29,16 +29,17 @@ Number of points to be generated
 npoints = 100000
 ```
 
-Generate npoint pairs of random numbers
+Generate npoint pairs of random numbers with congruent generator and fill it to 2D histogram
 
 ```python
 for n in range(npoints):
-    #Generate 2 random numbers with our generator
     xC = randCon()
     yC = randCon()
     histo1.Fill(xC, yC)
-
-    #Generate 2 random numbers with our RANLUX
+```
+Do the same for the more advanced random number generator
+```python
+for n in range(npoints):
     xRL = gRandom.Uniform()
     yRL = gRandom.Uniform()
     histo2.Fill(xRL, yRL)

@@ -4,8 +4,8 @@ services:
     - docker
 
 before_install:
-    - docker build . -t zleba/rootlhapdf 
-#    - docker pull zleba/rootlhapdf
+#    - docker build . -t zleba/rootlhapdf 
+    - docker pull zleba/rootlhapdf
     - docker images
 
 

@@ -3,7 +3,7 @@
 
 Check the jupyter version of the excercise
 [![Binder](https://mybinder.org/badge.svg)](https://hub.mybinder.org/user/zleba-mcschool-16lb7610/tree/Nb)
-[![NBviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/zleba/mcSchool/tree/gh-pages/Nb/)
+[![NBviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/zleba/mcSchool/tree/master/exerciseNb/)
 
 
 Use
