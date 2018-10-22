@@ -2,8 +2,8 @@
 [![Build Status](https://travis-ci.org/zleba/mcSchool.svg?branch=master)](https://travis-ci.org/zleba/mcSchool)
 
 Check the jupyter version of the excercise  
-Check and run the Jupyter notebooks here: [nbViewer](https://nbviewer.jupyter.org/github/zleba/mcSchool/tree/master/exerciseNb) [myBinder](https://hub.mybinder.org/user/zleba-mcschool-4mdvkssa/tree/exerciseNb)  
-Or the executed version: [nbViewer](https://nbviewer.jupyter.org/github/zleba/mcSchool/tree/master/exerciseNbExec) [myBinder](https://hub.mybinder.org/user/zleba-mcschool-4mdvkssa/tree/exerciseNbExec)
+Check and run the Jupyter notebooks here: [nbViewer](https://nbviewer.jupyter.org/github/zleba/mcSchool/tree/master/exerciseNb) [myBinder](https://mybinder.org/v2/gh/zleba/mcSchool/master?filepath=exerciseNb)  
+Or the executed version: [nbViewer](https://nbviewer.jupyter.org/github/zleba/mcSchool/tree/master/exerciseNbExec) [myBinder](https://mybinder.org/v2/gh/zleba/mcSchool/master?filepath=exerciseNbExec)
 
 Use
 ```
