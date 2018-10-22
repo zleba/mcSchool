@@ -20,9 +20,9 @@ RUN  sudo -H pip install --upgrade pip && sudo -H pip install --trusted-host pyp
 
 ENV HOME=/tmp
 WORKDIR ${HOME}
-RUN rm -f /tmp/* && mkdir -p ${HOME}/exerciseNb  -p ${HOME}/exerciseNbDone
+RUN rm -f /tmp/* && mkdir -p ${HOME}/exerciseNb  -p ${HOME}/exerciseNbExec
 COPY exerciseNb ${HOME}/exerciseNb
-COPY exerciseNbDone ${HOME}/exerciseNbDone
+COPY exerciseNbExec ${HOME}/exerciseNbExec
 
 # When starting the container and no command is started, run bash
 #CMD ["/bin/bash"]

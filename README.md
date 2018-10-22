@@ -3,7 +3,7 @@
 
 Check the jupyter version of the excercise  
 Check and run the Jupyter notebooks here: [nbViewer](https://nbviewer.jupyter.org/github/zleba/mcSchool/tree/master/exerciseNb) [myBinder](https://hub.mybinder.org/user/zleba-mcschool-4mdvkssa/tree/exerciseNb)  
-Or the executed version: [nbViewer](https://nbviewer.jupyter.org/github/zleba/mcSchool/tree/master/exerciseNbDone) [myBinder](https://hub.mybinder.org/user/zleba-mcschool-4mdvkssa/tree/exerciseNbDone)
+Or the executed version: [nbViewer](https://nbviewer.jupyter.org/github/zleba/mcSchool/tree/master/exerciseNbExec) [myBinder](https://hub.mybinder.org/user/zleba-mcschool-4mdvkssa/tree/exerciseNbExec)
 
 Use
 ```
