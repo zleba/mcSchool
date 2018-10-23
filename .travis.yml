@@ -40,9 +40,11 @@ script:
 #    - ./rd make exerciseHtml/example-6.html
 #    - ./rd make exerciseHtml/example-8.html
     #- ./rd make exerciseHtml/example-lhapdf.html
-    - mkdir -p public/Html public/Nb
+    - ./rd make allRun
+    - mkdir -p  public/Nb public/NbExec
 #   - cp exerciseHtml/*.html  public/Html
     - cp exerciseNb/*.ipynb   public/Nb
+    - cp exerciseNbExec/*.ipynb   public/NbExec
 
 
 deploy:
