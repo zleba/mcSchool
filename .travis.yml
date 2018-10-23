@@ -41,7 +41,7 @@ script:
 #    - ./rd make exerciseHtml/example-8.html
     #- ./rd make exerciseHtml/example-lhapdf.html
     - mkdir -p public/Html public/Nb
-    - cp exerciseHtml/*.html  public/Html
+#   - cp exerciseHtml/*.html  public/Html
     - cp exerciseNb/*.ipynb   public/Nb
 
 
