@@ -1,1 +1,1 @@
-sudo docker run --rm -p80:8888 zleba/rootlhapdf jupyter lab --ip 0.0.0.0
+sudo docker run --rm -p80:8888 -v $PWD:/home/jovyan/temp  zleba/rootlhapdf jupyter lab --ip 0.0.0.0
