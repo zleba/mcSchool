@@ -1,6 +1,5 @@
 # Correlations between random numbers
-First import from ROOT libraries which
-are needed
+First import from ROOT libraries which are needed
 
 ```python
 from  ROOT import TH2D, TCanvas, gRandom

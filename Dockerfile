@@ -18,8 +18,8 @@ RUN  apt-get update &&  apt-get install -y python-pip vim
 COPY requirements.txt .
 RUN  sudo -H pip install --upgrade pip && sudo -H pip install --trusted-host pypi.python.org -r requirements.txt
 
-ENV NB_USER=jovyan
-ENV NB_UID=1000
+ENV NB_USER jovyan
+ENV NB_UID 1000
 ENV HOME /home/${NB_USER}
 
 RUN adduser --disabled-password --gecos "Default user" \
