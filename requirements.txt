@@ -1,5 +1,5 @@
 jupyter
+notebook
+jupyterlab
 metakernel
 notedown
-jupyterlab
-notebook
