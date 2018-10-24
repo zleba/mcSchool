@@ -57,21 +57,18 @@ for n in range(npoints):
         continue
 
     #to simplify calculation
-    def q1(id):
-        return pdf.xfxQ(id, x1, m) / x1
-    def q2(id):
-        return pdf.xfxQ(id, x2, m) / x2
+    def q(id, x):
+        return pdf.xfxQ(id, x, m) / x
+    def qq(id):
+        return q(id,x1)*q(-id,x2) + q(-id,x1)*q(id,x2) 
 
     # u*ub + c*cb
-    UPqqb = q1(2)*q2(-2) + q1(4)*q2(-4)
+    UP = qq(2) + qq(4)
     # d*db + s*sb + b*bb 
-    DNqqb = q1(1)*q2(-1) + q1(3)*q2(-3) + q1(5)*q2(-5)
-    # for 1 <-> 2
-    UPqbq = q1(-2)*q2(2) + q1(-4)*q2(4)
-    DNqbq = q1(-1)*q2(1) + q1(-3)*q2(3) + q1(-5)*q2(5)
+    DN = qq(1) + qq(3) + qq(5)
 
-    #apply charges of quarks
-    res = ( (2./3)**2 * (UPqqb + UPqbq) + (1./3)**2 * (DNqqb + DNqbq) ) * sigma(m*m)
+    ##apply charges of quarks
+    res = ((2./3)**2 * UP + (1./3)**2 * DN) * sigma(m*m)
     f = res * wgt
 
     #fill histograms
