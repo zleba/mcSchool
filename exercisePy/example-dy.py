@@ -30,7 +30,7 @@ pdf = lhapdf.getPDFSet(name).mkPDF(0)
 hEta  = TH1D("eta", "Eta", 20, -12, 12)
 hMass = TH1D("mass", "Mass", 20, 40, 60)
 
-# Define the beam eneryg of the protons
+# Define the beam energy of the protons
 
 Eb = 6500
 xmin = 1e-5
@@ -40,7 +40,7 @@ xmax = pdf.xMax
 
 npoints = 1000000
 
-# Generate npoint pairs of random numbers with congruent generator and fill it to 2D histogram
+# Generate npoints of "events"
 
 s1 = s2 = 0
 for n in range(npoints):

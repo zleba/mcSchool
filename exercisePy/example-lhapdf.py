@@ -31,8 +31,6 @@ xmin, xmax = pdf.xMin, pdf.xMax
 npoints = 10000
 sum0 = sum00 = 0
 for n in range(npoints):
-    # for simple integration
-    # x = xmin + (xmax-xmin)*Rand();
     # for importance sampling
     x = xmin * (xmax/xmin)**gRandom.Uniform()
     #  sum over all flavors for mom sum rule

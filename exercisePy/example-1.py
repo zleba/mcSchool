@@ -1,3 +1,4 @@
+#!/usr/bin/env  python
 # ---
 # jupyter:
 #   kernelspec:
@@ -47,5 +48,6 @@ c = TCanvas()
 histo1.Draw()
 c.Draw()
 
+d = TCanvas()
 histo2.Draw()
-c.Draw()
+d.Draw()

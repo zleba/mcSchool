@@ -1,4 +1,4 @@
-INPUT  = $(wildcard exercisePy/example-[1-8].py)  exercisePy/example-lhapdf.py  exercisePy/example-dy.py
+INPUT  = $(wildcard exercisePy/example-[1-8].py)  exercisePy/example-lhapdf.py  exercisePy/example-dy.py exercisePy/example-hg.py
 NbOutT = $(subst Py,Nb,${INPUT})
 NbOut  = $(subst py,ipynb,${NbOutT})
 NbOutD = $(subst Nb,NbExec,${NbOut})
