@@ -42,7 +42,7 @@ The `-i` is for interactive mode, which can be useful if some plots needs to be 
 
 The c++ programs are longer and need to be compiled but run faster.
 
-Standardly compile using make and run afterwards in the docker environment `rd`
+Compile in the standard way using make and run afterwards, all in the docker environment `rd`
 ```
 cd exerciseCpp
 ./rd make
@@ -63,7 +63,7 @@ Just call
 ```
 source setupCVMFS.sh
 ```
-to setup the enviroment and then simple run Python or C++ programs as above, but without `./rd` in front.
+to setup the environment and then simple run Python or C++ programs as above, but without `./rd` in front.
 
 ## Offline running without access to CVMFS
 
