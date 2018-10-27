@@ -21,13 +21,13 @@ def alphaS(q):
     Qval = max(Qlam0, q)
     return pi / (beta0*log(Qval/QCDlam))
 
-# The splitting function at the LO without alphaS
+# The splitting function at the LO without $\alpha_S$
 
 def Splitting(z):
     return 6*(1/z -2 +z*(1-z) + 1/(1-z)) #g -> g
     #return 4/3*((1+z*z)/(1-z)) #q -> q
 
-# Integrand inside of the sudakov
+# Integrand inside of the Sudakov
 
 def suda(t1, t2):
     # Generate randomly q2
@@ -44,7 +44,7 @@ def suda(t1, t2):
     weight = q2*log(t2/t1) * z1*log(z1max/z1min)
     return integrand*weight 
 
-# Function to calculate sudakov
+# Function to calculate the Sudakov
 
 def Sudakov(t1, t2):
     sum0 = sum00 = 0

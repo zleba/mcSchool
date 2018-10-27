@@ -25,10 +25,10 @@ xmin = 1e-4
 npoints = 1000000
 xg0 = xg00 = 0
 for n1 in range(npoints):
-    #here do the calcualtion with importance sampling
+    #here do the calculation with importance sampling
     x0 = xmin**gRandom.Uniform()
     weight = x0*log(1/xmin)
-    # here do the calcualtion using linear sampling
+    # here do the calculation using linear sampling
     # x0 = xmin+(1-xmin)*gRandom.Uniform()
     # weight = 1-xmin
     f  = g0(x0) 

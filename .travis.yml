@@ -41,8 +41,7 @@ script:
     - git config user.name zleba
     - git checkout master
     - git add exerciseNb/*.ipynb exerciseNbExec/*.ipynb
-#    - git commit -m "robot add [ci skip]"
-    - git commit --amend "robot add [ci skip]"
+    - git commit  "robot add [ci skip]" | true
     - git push  "https://${GITHUB_TOKEN}@github.com/zleba/mcSchool.git" master 
 
 

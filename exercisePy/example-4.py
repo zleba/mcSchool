@@ -5,7 +5,7 @@
 #     display_name: Python 2
 # ---
 
-# # Demonstration of hit & mis method
+# # Demonstration of hit & miss method
 # Import what is needed
 
 from ROOT import gRandom

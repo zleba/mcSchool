@@ -6,12 +6,12 @@
 # ---
 
 # # Calculate the cross section of the Higgs boson
-# Import what is necesary
+# Import what is necessary
 
 from math import pi, sin, cos, log, log10, sqrt
 from ROOT import gRandom, gStyle, TLorentzVector, TCanvas, TH1D
 
-# The cross section of the higgs
+# The cross section of the Higgs
 
 def sigma(m2):
     # calculate sigma0(gg->H) 
@@ -24,7 +24,7 @@ def sigma(m2):
     BW = Gamma/(pow((mass-m_higgs),2) + pow(Gamma,2)/4)/2./pi
     return result * BW
 
-# Function to get randomly 2D gausian distribution
+# Function to get randomly 2D Gaussian distribution
 
 def gauss2D(sigma):
     kT  = sigma * sqrt(-2*log(gRandom.Uniform()))

@@ -33,7 +33,7 @@ avg2 = s2 / npoints
 
 sigma2 = avg2 - avg*avg
 
-# The actuall error behaves as 1/sqrt(npoints)
+# The actual error behaves as 1/sqrt(npoints)
 
 error = sqrt(sigma2/npoints) ;
 

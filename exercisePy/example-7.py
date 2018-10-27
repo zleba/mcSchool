@@ -19,7 +19,7 @@ def gauss2D(sigma):
     kx, ky = kT*cos(phi), kT*sin(phi)
     return (kx, ky)
 
-# Get PDF at the scale q2 (currently no dependece on q2)
+# Get PDF at the scale $q^2$ (currently no dependence on $q^2$)
 
 Eb = 3500 # Beam energy
 def getpdf(q2):
@@ -84,7 +84,7 @@ def splitting():
     weightz = 1.
     return z
 
-# Evolve the PDF between scales q20 and q2, the kinematics of the parton in the beggining is described by four-vector p0
+# Evolve the PDF between scales $q^2_0$ and $q^2$, the kinematics of the parton in the beginning is described by four-vector p0
 
 def evolve_pdf(q20, q2, p0):
     x = p0.Pz()/Eb
@@ -102,7 +102,7 @@ def evolve_pdf(q20, q2, p0):
         z = splitting()
         #   since the sudakov involves only the 1/(1-z) part 
         #   of the splitting fct, we need to weight each branching
-        #   by the ratio of the intgral of the full and 
+        #   by the ratio of the integral of the full and 
         #   approximate splitting fct
 
         ratio_splitting = 2 # for using Pgg
@@ -172,7 +172,7 @@ histo3.Draw("hist e");
 c.Draw()
 # -
 
-# Plot the kT distribution in the starting scale and after the evolution
+# Plot the $k_T$ distribution in the starting scale and after the evolution
 
 # +
 d = TCanvas();
