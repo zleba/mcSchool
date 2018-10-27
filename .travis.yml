@@ -48,7 +48,7 @@ script:
 
     - git config user.email radek.zlebcik@gmail.com
     - git config user.name zleba
-    - git touch helenka
+    - touch helenka
     - git add helenka
     - git commit helenka -m "[ci skip]"
     - git push  "https://${GITHUB_TOKEN}@github.com/zleba/mcSchool.git" master 
