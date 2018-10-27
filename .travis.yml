@@ -48,6 +48,7 @@ script:
 
     - git config user.email radek.zlebcik@gmail.com
     - git config user.name zleba
+    - git checkout master
     - echo "testik" >  papapa
     - git add papapa
     - git commit papapa -m "[ci skip]"
