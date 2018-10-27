@@ -5,14 +5,14 @@
 #     display_name: Python 2
 # ---
 
-# # Demonstration of the cental limit theorem
+# # Demonstration of the central limit theorem
 #
 # First import what is needed
 
 from ROOT import TH1D, gRandom, TCanvas
 from math import sqrt
 
-# Define histograms with sum fo random numbers
+# Define histograms with sum of random numbers
 
 points = [1, 2, 3, 6, 12, 20, 40]
 histos = {}
