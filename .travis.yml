@@ -41,7 +41,7 @@ script:
     - git config user.name zleba
     - git checkout master
     - git add exerciseNb/*.ipynb exerciseNbExec/*.ipynb
-    - git commit  "robot add [ci skip]" | true
+    - git commit -m "robot add [ci skip]" | true
     - git push  "https://${GITHUB_TOKEN}@github.com/zleba/mcSchool.git" master 
 
 
@@ -50,7 +50,7 @@ deploy:
   local-dir : public
   skip-cleanup: true
   github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-  keep-history: true
+  keep-history: false
   on:
     branch: master
 

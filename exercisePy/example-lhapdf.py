@@ -7,7 +7,6 @@
 
 # # Playing with parton densities
 # ## Checking the sum rules
-# Imprort ROOT, math functions, lhapdf
 
 from ROOT import gRandom
 from math import sqrt, log
@@ -58,7 +57,7 @@ print " momentum sum rule is: ", sum0, "+/-", error
 
 from ROOT import TGraph, TCanvas, kRed
 
-# Evaluate the gluon and up-quark pdf at the xPoints with logaritmic spacing
+# Evaluate the gluon and up-quark pdf at the xPoints with logarithmic spacing
 
 n = 100
 xPoints = [10**(5*x/float(n)) for x in range(-n,0) ]
