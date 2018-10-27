@@ -21,8 +21,10 @@ mH   = 125      #Higgs mass
 def sigma(shat):
     ge2mb = 0.389379 #from natural units to mb
     Bin = 0.0857     #The H->gg  BR (production mode)
+#   Bin = 0.0630585  #The H->gg  BR (production mode)
     Bout = 1         #The H->any BR
     w    = 0.00407   #Higgs total decay width
+#   w    = 0.00374   #Higgs total decay width
     Ncg  = 8         #Number of colors for gluon
     Nsg  = 2         #Number of spin projections for gluon
 
@@ -104,7 +106,7 @@ err = sqrt(sigma2/npoints)
 
 # Print the x-section
 
-print 'Cross section for pp -> H- is ', avg, '+-', err, 'mb'
+print 'Cross section for pp -> H is ', avg, '+-', err, 'mb'
 
 # Plot histograms
 
