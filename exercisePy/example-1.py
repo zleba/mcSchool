@@ -13,8 +13,8 @@ from  ROOT import TH2D, TCanvas, gRandom
 
 # Define the 2D histograms to display the correlation between random numbers
 
-histo1 = TH2D("congruent", "congruental random numbers ",100, 0, 1, 100, 0, 1)
-histo2 = TH2D("RANLUX", "RANLUX",100, 0, 1, 100, 0, 1)
+hConguent= TH2D("Congruent", "congruental random numbers ",100, 0, 1, 100, 0, 1)
+hRANLUX = TH2D("RANLUX", "RANLUX",100, 0, 1, 100, 0, 1)
 
 # Define our first congruent generator
 
@@ -33,21 +33,21 @@ npoints = 100000
 for n in range(npoints):
     xC = randCon()
     yC = randCon()
-    histo1.Fill(xC, yC)
+    hConguent.Fill(xC, yC)
 
 # Do the same for the more advanced random number generator
 
 for n in range(npoints):
     xRL = gRandom.Uniform()
     yRL = gRandom.Uniform()
-    histo2.Fill(xRL, yRL)
+    hRANLUX.Fill(xRL, yRL)
 
 # Plotting the results
 
 c = TCanvas()
-histo1.Draw()
+hConguent.Draw()
 c.Draw()
 
 d = TCanvas()
-histo2.Draw()
+hRANLUX.Draw()
 d.Draw()

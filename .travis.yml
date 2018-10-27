@@ -49,9 +49,8 @@ script:
     - git config user.email radek.zlebcik@gmail.com
     - git config user.name zleba
     - git checkout master
-    - echo "testik" >  papapa
-    - git add papapa
-    - git commit papapa -m "[ci skip]"
+    - git add exerciseNb/*.ipynb exerciseNbExec/*.ipynb
+    - git commit -m "robot add [ci skip]"
     - git push  "https://${GITHUB_TOKEN}@github.com/zleba/mcSchool.git" master 
 
 
