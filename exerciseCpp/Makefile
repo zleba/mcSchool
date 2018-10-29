@@ -8,6 +8,11 @@ CFLAGS=-g -Wall -O3
 
 all: example-1 example-2 example-3 example-4 example-5 example-6 example-7 example-8 example-9 example-lhapdf
 
+allRun: example1.txt example2.txt example3.txt example4.txt example5.txt example6.txt example7.txt example8.txt example9.txt examplelhapdf.txt
+
+example%.txt: example-%
+	./$^ | tee $@
+
 # Rule to compile examples
 example-%: example-%.cc ranlxd.o
 	g++ $(CFLAGS) $(ROOTCFLAGS)   $^  $(ROOTLIBS)  -o $@ 

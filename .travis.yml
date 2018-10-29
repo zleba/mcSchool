@@ -21,16 +21,17 @@ script:
     - ./rd make -j`nproc` all
 
 #Test it
-    - ./rd ./example-1 | tee example1.txt
-    - ./rd ./example-2 | tee example2.txt
-    - ./rd ./example-3 | tee example3.txt
-    - ./rd ./example-4 | tee example4.txt
-    - ./rd ./example-5 | tee example5.txt
-    - ./rd ./example-lhapdf | tee examplelhapdf.txt
-    - ./rd ./example-6 | tee example6.txt
-    - ./rd ./example-7 | tee example7.txt
-    - ./rd ./example-8 | tee example8.txt
-    - ./rd ./example-9 | tee example9.txt
+    - ./rd make -j`nproc` allRun
+#    - ./rd ./example-1 | tee example1.txt
+#    - ./rd ./example-2 | tee example2.txt
+#    - ./rd ./example-3 | tee example3.txt
+#    - ./rd ./example-4 | tee example4.txt
+#    - ./rd ./example-5 | tee example5.txt
+#    - ./rd ./example-lhapdf | tee examplelhapdf.txt
+#    - ./rd ./example-6 | tee example6.txt
+#    - ./rd ./example-7 | tee example7.txt
+#    - ./rd ./example-8 | tee example8.txt
+#    - ./rd ./example-9 | tee example9.txt
 
     - mkdir -p ../public/cpp
     - cp *.pdf *.txt ../public/cpp
