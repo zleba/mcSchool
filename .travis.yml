@@ -47,6 +47,8 @@ script:
     - git commit -m "robot add [ci skip]" | true
     - git push  "https://${GITHUB_TOKEN}@github.com/zleba/mcSchool.git" master 
 
+    - docker build . --cache-from  zleba/rootlhapdf:latest -t zleba/rootlhapdf:latest
+    - docker push zleba/rootlhapdf:latest
 
 deploy:
   provider: pages
