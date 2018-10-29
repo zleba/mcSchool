@@ -1,0 +1,6 @@
+jupyter
+notebook
+jupyterlab
+metakernel
+notedown
+jupytext
