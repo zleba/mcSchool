@@ -17,7 +17,8 @@ before_install:
 script:
 #Compile it
     - cd exerciseCpp
-    - ./rd make -j2 all
+    - nproc
+    - ./rd make -j`nproc` all
 
 #Test it
     - ./rd ./example-1 | tee example1.txt
@@ -37,7 +38,7 @@ script:
 
 #Test Py
     - cd ..
-    - ./rd make allRun
+    - ./rd make -j`nproc` allRun
     - mkdir -p  public/Nb public/NbExec
     - cp exerciseNb/*.ipynb   public/Nb
     - cp exerciseNbExec/*.ipynb   public/NbExec
