@@ -4,34 +4,20 @@ services:
     - docker
 
 before_install:
-#    - docker build . -t zleba/rootlhapdf 
+#    - Build system
     - docker pull zleba/rootlhapdf:system
     - cd system && docker build . --cache-from  zleba/rootlhapdf:system -t zleba/rootlhapdf:system && cd ..
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker push zleba/rootlhapdf:system
     - docker tag  zleba/rootlhapdf:system   zleba/rootlhapdf:latest
-#    - cd ..     && docker build . --cache-from  zleba/rootlhapdf:latest -t zleba/rootlhapdf:latest
-#    - docker push zleba/rootlhapdf:latest
-#    - docker images
 
 script:
 #Compile it
     - cd exerciseCpp
-    - nproc
     - ./rd make -j`nproc` all
 
 #Test it
     - ./rd make -j`nproc` allRun
-#    - ./rd ./example-1 | tee example1.txt
-#    - ./rd ./example-2 | tee example2.txt
-#    - ./rd ./example-3 | tee example3.txt
-#    - ./rd ./example-4 | tee example4.txt
-#    - ./rd ./example-5 | tee example5.txt
-#    - ./rd ./example-lhapdf | tee examplelhapdf.txt
-#    - ./rd ./example-6 | tee example6.txt
-#    - ./rd ./example-7 | tee example7.txt
-#    - ./rd ./example-8 | tee example8.txt
-#    - ./rd ./example-9 | tee example9.txt
 
     - mkdir -p ../public/cpp
     - cp *.pdf *.txt ../public/cpp
@@ -51,6 +37,7 @@ script:
     - git commit -m "robot add [ci skip]" | true
     - git push  "https://${GITHUB_TOKEN}@github.com/zleba/mcSchool.git" master 
 
+#push newer version
     - docker build . --cache-from  zleba/rootlhapdf:latest -t zleba/rootlhapdf:latest
     - docker push zleba/rootlhapdf:latest
 
