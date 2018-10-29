@@ -9,6 +9,7 @@ before_install:
     - cd system && docker build . --cache-from  zleba/rootlhapdf:system -t zleba/rootlhapdf:system && cd ..
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker push zleba/rootlhapdf:system
+    - docker tag  zleba/rootlhapdf:system   zleba/rootlhapdf:latest
 #    - cd ..     && docker build . --cache-from  zleba/rootlhapdf:latest -t zleba/rootlhapdf:latest
 #    - docker push zleba/rootlhapdf:latest
 #    - docker images
