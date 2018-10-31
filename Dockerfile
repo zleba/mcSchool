@@ -1,23 +1,6 @@
 #Docker with system environment, based on rootproject/root-ubuntu16
 FROM  zleba/rootlhapdf:system  
 
-## Run the following commands as super user (root):
-#USER root
-#
-##Instal LHAPDF
-#WORKDIR /
-#COPY installLHA.sh .
-#RUN ./installLHA.sh
-#ENV PATH="/lhapdf/install/bin/:${PATH}"
-#
-#ENV PYTHONPATH="/lhapdf/install/lib/python2.7/site-packages/:${PYTHONPATH}"
-#ENV LD_LIBRARY_PATH="/lhapdf/install/lib/:${LD_LIBRARY_PATH}"
-#
-#ENV PYTHONPATH="/usr/local/lib/root:${PYTHONPATH}"
-#RUN  apt-get update &&  apt-get install -y python-pip vim
-#COPY requirements.txt .
-#RUN  sudo -H pip install --upgrade pip && sudo -H pip install --trusted-host pypi.python.org -r requirements.txt
-
 ENV NB_USER jovyan
 ENV NB_UID 1000
 ENV HOME /home/${NB_USER}
@@ -35,5 +18,4 @@ COPY --chown=jovyan exercisePy ${HOME}/exercisePy
 EXPOSE 8888
 
 # When starting the container and no command is started, run bash
-#CMD ["/bin/bash"]
 CMD ["jupyter", "notebook",  "--ip", "0.0.0.0"]
