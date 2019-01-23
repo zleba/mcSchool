@@ -3,7 +3,7 @@ FROM rootproject/root-ubuntu16
 
 # Run the following commands as super user (root):
 USER root
-RUN  apt-get update &&  apt-get install -y python-pip vim && rm -rf /var/lib/apt/lists/*
+RUN  apt-get update &&  apt-get install -y python-pip vim wget && rm -rf /var/lib/apt/lists/*
 
 #Instal LHAPDF
 WORKDIR /
