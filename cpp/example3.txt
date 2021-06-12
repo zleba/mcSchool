@@ -1,0 +1,2 @@
+ integral for 3x**2 is: 1.00027+/-0.00028281
+ true integral for 3x**2 is : 1.0 

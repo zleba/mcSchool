@@ -1,0 +1,2 @@
+ integral for g(x) = (1-x)**5/x is: 6.93021+/-0.00314051
+Exact value 6.92747

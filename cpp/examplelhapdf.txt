@@ -1,0 +1,18 @@
+LHAPDF 6.2.1 loading /lhapdf/install/share/LHAPDF/MRSTMCal/MRSTMCal_0000.dat
+MRSTMCal PDF set, member #0, version 2; LHAPDF ID = 20651
+alphas(mz) = 0.114897
+qcdlam4    = 0.265
+qcdlam5    = 0.182
+orderPDF   = 0
+xmin       = 1e-05
+xmax       = 1
+q2min      = 1.24999
+q2max      = 1e+07
+orderalfas = 1
+num flav   = 5
+name       = MRSTMCal
+number     = 0
+
+ mom sum rule is: 1.14655+/-0.00377547
+Thanks for using LHAPDF 6.2.1. Please make sure to cite the paper:
+  Eur.Phys.J. C75 (2015) 3, 132  (http://arxiv.org/abs/1412.7420)

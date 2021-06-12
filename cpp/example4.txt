@@ -1,0 +1,2 @@
+ integral for  is: 0.49991+/-5e-05
+ true integral  is : 0.5 

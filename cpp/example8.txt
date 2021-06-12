@@ -1,0 +1,2 @@
+ nr of events accepted: 808442
+ integral for Higgs xsection is [pb]: 0.0186533 +/- 0.000644809
